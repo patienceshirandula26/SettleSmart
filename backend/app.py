@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import pymysql
 from config import Config
 
@@ -38,6 +38,42 @@ def get_users():
     finally:
         connection.close()
 
+@app.route("/api/login", methods=["POST"])
+def login():
+    data = request.get_json()
+
+    email = data.get("email")
+    password = data.get("password")
+
+    connection = get_connection()
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT user_id, full_name, email, university, arrival_date
+                FROM users
+                WHERE email = %s AND password = %s
+                """,
+                (email, password)
+            )
+
+            user = cursor.fetchone()
+
+        if user:
+            return jsonify({
+                "success": True,
+                "message": "Login successful",
+                "user": user
+            })
+
+        return jsonify({
+            "success": False,
+            "message": "Invalid email or password"
+        }), 401
+
+    finally:
+        connection.close()
 
 if __name__ == "__main__":
     app.run(debug=True)
