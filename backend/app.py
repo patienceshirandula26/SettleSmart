@@ -246,5 +246,44 @@ def get_resources():
     finally:
         connection.close()
 
+# ==========================================
+# GET USER PROFILE
+# Returns a single user's profile information
+# ==========================================
+@app.route("/api/profile/<int:user_id>", methods=["GET"])
+def get_profile(user_id):
+
+    connection = get_connection()
+
+    try:
+        with connection.cursor() as cursor:
+
+            sql = """
+                SELECT
+                    user_id,
+                    full_name,
+                    email,
+                    university,
+                    arrival_date,
+                    created_at
+                FROM users
+                WHERE user_id = %s
+            """
+
+            cursor.execute(sql, (user_id,))
+
+            user = cursor.fetchone()
+
+        if user:
+            return jsonify(user)
+
+        return jsonify({
+            "success": False,
+            "message": "User not found"
+        }), 404
+
+    finally:
+        connection.close()
+
 if __name__ == "__main__":
     app.run(debug=True)
