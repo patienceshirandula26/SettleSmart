@@ -1,0 +1,52 @@
+/* ---------- Page header ---------- */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.page-subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+/* ---------- Filter chips ---------- */
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+}
+
+.chip:hover {
+    border-color: #cbd5e1;
+    color: #0f172a;
+}
+
+.chip.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+}

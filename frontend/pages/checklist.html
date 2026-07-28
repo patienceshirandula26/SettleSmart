@@ -4,16 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist | SettleSmart</title>
+    <title>Settlement Checklist | SettleSmart</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/checklist.css">
 </head>
 
 <body>
 
-<h1>Checklist</h1>
+<div class="dashboard">
 
-<script src="../js/script.js"></script>
+    
+
+    <main class="main-content">
+
+        <header class="page-header">
+            <div>
+                <h1 class="page-title">Settlement checklist</h1>
+                <p class="page-subtitle">Track the essential setup tasks after arriving in Australia.</p>
+            </div>
+            <div class="avatar">PS</div>
+        </header>
+
+        <div class="filter-bar">
+            <button class="chip active" type="button" data-filter="all">All</button>
+            <button class="chip" type="button" data-filter="identity">Identity &amp; Study</button>
+            <button class="chip" type="button" data-filter="financial">Financial</button>
+            <button class="chip" type="button" data-filter="transport">Transport</button>
+            <button class="chip" type="button" data-filter="health">Health</button>
+            <button class="chip" type="button" data-filter="accommodation">Accommodation</button>
+            <button class="chip" type="button" data-filter="clearances">Work Clearances</button>
+            <button class="chip" type="button" data-filter="employment">Employment</button>
+        </div>
+
+        <!-- PART 2 GOES HERE -->
+
+    </main>
+
+</div>
+
+<script src="../js/checklist.js"></script>
 
 </body>
 
