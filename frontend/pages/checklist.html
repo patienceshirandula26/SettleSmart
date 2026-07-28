@@ -7,25 +7,38 @@
     <title>Settlement Checklist | SettleSmart</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/checklist.css">
 </head>
 
 <body>
 
-<div class="dashboard">
+<div class="app">
 
-    <a href="dashboard.html" class="nav-link">
-    <a href="checklist.html" class="nav-link active">
+    <!-- ============ Sidebar ============ -->
+    <aside class="sidebar">
 
-    <main class="main-content">
+        <div class="logo">
+            <span class="logo-mark">S</span>
+            <span class="logo-text">SettleSmart</span>
+        </div>
+
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="checklist.html" class="nav-link active">Checklist</a>
+        <a href="documents.html" class="nav-link">Documents</a>
+        <a href="resources.html" class="nav-link">Guide</a>
+        <a href="reminders.html" class="nav-link">Reminders</a>
+
+    </aside>
+
+    <!-- ============ Main ============ -->
+    <main class="main">
 
         <header class="page-header">
             <div>
                 <h1 class="page-title">Settlement checklist</h1>
                 <p class="page-subtitle">Track the essential setup tasks after arriving in Australia.</p>
             </div>
-            <div class="avatar">PS</div>
+            <div class="avatar">AM</div>
         </header>
 
         <div class="filter-bar">
@@ -39,7 +52,7 @@
             <button class="chip" type="button" data-filter="employment">Employment</button>
         </div>
 
-        <section class="card task-group" data-category="identity">
+        <section class="task-group" data-category="identity">
 
             <div class="group-header">
                 <h2 class="group-name">Identity &amp; Study</h2>
@@ -68,7 +81,7 @@
 
             <div class="task-item done">
                 <div class="task-main">
-                    <button class="task-box" type="button" aria-label="Toggle Organise passport and visa copies">&#10003;</button>
+                    <button class="task-box" type="button" aria-label="Toggle Organise passport &amp; visa copies">&#10003;</button>
                     <div>
                         <p class="task-title">Organise passport &amp; visa copies</p>
                         <p class="task-desc">Keep digital and physical copies</p>
@@ -78,7 +91,7 @@
 
         </section>
 
-        <section class="card task-group" data-category="financial">
+        <section class="task-group" data-category="financial">
 
             <div class="group-header">
                 <h2 class="group-name">Financial</h2>
@@ -118,7 +131,7 @@
 
         </section>
 
-        <section class="card task-group" data-category="transport">
+        <section class="task-group" data-category="transport">
 
             <div class="group-header">
                 <h2 class="group-name">Transport &amp; Licensing</h2>

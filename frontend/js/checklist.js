@@ -1,3 +1,9 @@
+/* =========================================================
+   SettleSmart — Settlement checklist
+   Handles category filtering and ticking tasks off.
+   State is in-page only; wire to the backend later.
+   ========================================================= */
+
 document.addEventListener("DOMContentLoaded", function () {
 
     var chips = document.querySelectorAll(".chip");
