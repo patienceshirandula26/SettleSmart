@@ -176,5 +176,40 @@ def update_task_status():
     finally:
         connection.close()
 
+# ==========================================
+# GET USER DOCUMENTS
+# Returns all uploaded documents for a user
+# ==========================================
+@app.route("/api/documents/<int:user_id>", methods=["GET"])
+def get_documents(user_id):
+
+    connection = get_connection()
+
+    try:
+        with connection.cursor() as cursor:
+
+            sql = """
+                SELECT
+                    document_id,
+                    document_name,
+                    document_type,
+                    status,
+                    reference_number,
+                    provider,
+                    notes
+                FROM documents
+                WHERE user_id = %s
+                ORDER BY document_name
+            """
+
+            cursor.execute(sql, (user_id,))
+
+            documents = cursor.fetchall()
+
+        return jsonify(documents)
+
+    finally:
+        connection.close()
+
 if __name__ == "__main__":
     app.run(debug=True)
