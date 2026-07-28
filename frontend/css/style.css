@@ -64,79 +64,335 @@ p{
 
     transform:translateY(-3px);
 }
+
+/* =========================================================
+   Dashboard — matches Figma "02 · Dashboard"
+   File: SettleSmart – Web App Design
+   ========================================================= */
+
 .dashboard {
     display: flex;
     min-height: 100vh;
     background: #f8fafc;
+    font-family: "Inter", sans-serif;
 }
 
+/* Reset landing-page typography inside the dashboard */
+.dashboard p {
+    font-size: inherit;
+    color: inherit;
+    line-height: normal;
+    margin: 0;
+}
+
+/* ---------- Sidebar ---------- */
+
 .sidebar {
-    width: 260px;
+    width: 240px;
+    flex-shrink: 0;
     background: #ffffff;
     border-right: 1px solid #e2e8f0;
-    padding: 24px 18px;
+    padding: 28px 16px;
     display: flex;
     flex-direction: column;
+    gap: 4px;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 22px;
+    gap: 10px;
+    padding: 0 12px 24px;
+}
+
+.logo-mark {
+    width: 32px;
+    height: 32px;
+    background: #2563eb;
+    color: #ffffff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
     font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 40px;
+}
+
+.logo-text {
+    font-size: 17px;
+    font-weight: 600;
+    color: #0f172a;
 }
 
 .nav-menu {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 4px;
 }
 
 .nav-link {
     text-decoration: none;
     color: #64748b;
-    font-weight: 600;
-    padding: 14px 16px;
-    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 12px;
+    border-radius: 8px;
 }
 
-.nav-link:hover,
+.nav-link:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
 .nav-link.active {
-    background: #2563eb;
-    color: #ffffff;
+    background: #eff4ff;
+    color: #2563eb;
+    font-weight: 600;
 }
 
-.sidebar-user {
-    margin-top: auto;
+/* ---------- Main content ---------- */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.page-header {
     display: flex;
     align-items: center;
-    gap: 12px;
-    border-top: 1px solid #e2e8f0;
-    padding-top: 20px;
+    justify-content: space-between;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.page-subtitle {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 4px;
 }
 
 .avatar {
-    width: 42px;
-    height: 42px;
-    background: #2563eb;
-    color: #ffffff;
-    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    background: #eff4ff;
+    color: #2563eb;
+    border-radius: 999px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* ---------- Stat cards ---------- */
+
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stat-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748b;
+}
+
+.stat-value {
+    font-size: 28px;
     font-weight: 700;
+    color: #0f172a;
 }
 
-.sidebar-user h4 {
-    font-size: 14px;
-    color: #1e293b;
-}
-
-.sidebar-user p {
+.stat-note {
     font-size: 12px;
     color: #64748b;
-    margin: 0;
+}
+
+/* ---------- Progress bars ---------- */
+
+.progress-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.progress-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.progress-meta {
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748b;
+}
+
+.progress-track {
+    flex: 1;
+    height: 8px;
+    background: #f1f5f9;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-track-lg {
+    height: 10px;
+    border-radius: 5px;
+    flex: none;
+    width: 100%;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #2563eb;
+    border-radius: inherit;
+}
+
+.progress-fill-success {
+    background: #10b981;
+}
+
+.progress-fill-empty {
+    /* 0% categories show a tiny 4px sliver, as in the design */
+    min-width: 4px;
+}
+
+/* ---------- Two-column row ---------- */
+
+.dashboard-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+/* Upcoming due dates */
+
+.due-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.due-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.due-item-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #0f172a;
+}
+
+.due-item-meta {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.badge {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+
+.badge-warning {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.badge-neutral {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+/* Progress by category */
+
+.category-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.category-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.category-name {
+    width: 170px;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748b;
+}
+
+.category-percent {
+    width: 36px;
+    flex-shrink: 0;
+    text-align: right;
+    font-size: 12px;
+    font-weight: 500;
+    color: #64748b;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1024px) {
+    .stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .sidebar {
+        display: none;
+    }
+
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
 }
