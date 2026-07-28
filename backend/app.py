@@ -211,5 +211,40 @@ def get_documents(user_id):
     finally:
         connection.close()
 
+# ==========================================
+# GET ALL RESOURCES
+# Returns settlement resources grouped by category
+# ==========================================
+@app.route("/api/resources", methods=["GET"])
+def get_resources():
+
+    # Connect to the database
+    connection = get_connection()
+
+    try:
+        with connection.cursor() as cursor:
+
+            sql = """
+                SELECT
+                    r.resource_id,
+                    r.resource_name,
+                    r.description,
+                    r.official_link,
+                    c.category_name
+                FROM resources r
+                JOIN categories c
+                    ON r.category_id = c.category_id
+                ORDER BY c.category_name, r.resource_name
+            """
+
+            cursor.execute(sql)
+
+            resources = cursor.fetchall()
+
+        return jsonify(resources)
+
+    finally:
+        connection.close()
+
 if __name__ == "__main__":
     app.run(debug=True)
