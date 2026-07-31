@@ -1,20 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reminders | SettleSmart</title>
+  <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="../css/style.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>SettleSmart | Reminders</title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../css/reminders.css"
+  >
 </head>
 
 <body>
+  <div class="app-layout">
 
-<h1>Reminders</h1>
+    <!-- Sidebar -->
+    <aside class="sidebar">
 
-<script src="../js/script.js"></script>
+      <a
+        class="logo"
+        href="dashboard.html"
+      >
+        <span class="logo-icon">S</span>
+        <span>SettleSmart</span>
+      </a>
 
+      <nav class="sidebar-navigation">
+
+        <a href="dashboard.html">
+          <span class="navigation-icon">⌂</span>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="checklist.html">
+          <span class="navigation-icon">✓</span>
+          <span>Settlement Checklist</span>
+        </a>
+
+        <a href="documents.html">
+          <span class="navigation-icon">□</span>
+          <span>Documents</span>
+        </a>
+
+        <a
+          class="active"
+          href="reminders.html"
+          aria-current="page"
+        >
+          <span class="navigation-icon">◷</span>
+          <span>Reminders</span>
+        </a>
+
+        <a href="resources.html">
+          <span class="navigation-icon">◎</span>
+          <span>Official Resources</span>
+        </a>
+
+        <a href="profile.html">
+          <span class="navigation-icon">○</span>
+          <span>Profile</span>
+        </a>
+
+        <a href="settings.html">
+          <span class="navigation-icon">⚙</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+
+        <div class="sidebar-profile">
+          <div class="avatar">PS</div>
+
+          <div class="profile-information">
+            <strong>Patience Shirandula</strong>
+            <span>Int. Student · QLD</span>
+          </div>
+        </div>
+
+        <a
+          class="logout-link"
+          href="../index.html"
+        >
+          Log out
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main-content">
+
+      <!-- Top bar -->
+      <header class="topbar">
+
+        <label
+          class="search-container"
+          for="searchInput"
+        >
+          <span class="search-icon">⌕</span>
+
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Search reminders..."
+            autocomplete="off"
+          >
+        </label>
+
+        <div class="topbar-profile">
+
+          <button
+            class="notification-button"
+            type="button"
+            aria-label="View notifications"
+          >
+            ♧
+            <span class="notification-dot"></span>
+          </button>
+
+          <div class="avatar">PS</div>
+
+          <div class="profile-information">
+            <strong>Patience Shirandula</strong>
+            <span>Student</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page heading -->
+      <section class="page-heading">
+        <h1>Reminders</h1>
+
+        <p>
+          Stay on top of important dates and deadlines.
+        </p>
+      </section>
+
+      <!-- Create button -->
+      <button
+        id="createReminderButton"
+        class="create-reminder-button"
+        type="button"
+      >
+        + Create Reminder
+      </button>
+
+      <!-- Main reminder area -->
+      <section class="reminder-content">
+
+        <article class="reminders-panel">
+
+          <div class="panel-heading">
+            <h2>All Reminders</h2>
+
+            <span
+              id="reminderCount"
+              class="reminder-count"
+            >
+              0 reminders
+            </span>
+          </div>
+
+          <div
+            id="reminderList"
+            class="reminder-list"
+            aria-live="polite"
+          ></div>
+
+          <div
+            id="emptyMessage"
+            class="empty-message"
+            hidden
+          >
+            <h3>No reminders found</h3>
+
+            <p>
+              Create a new reminder or change your search.
+            </p>
+          </div>
+        </article>
+
+        <aside class="information-panel">
+
+          <div class="information-icon">i</div>
+
+          <div>
+            <h2>Did you know?</h2>
+
+            <p>
+              Set reminders for visa conditions, OSHC renewal
+              and rental deadlines so you never miss an
+              important date.
+            </p>
+
+            <a href="resources.html">
+              Learn more
+            </a>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <!-- Create reminder modal -->
+  <div
+    id="reminderModal"
+    class="modal"
+    hidden
+  >
+    <div
+      class="modal-overlay"
+      data-close-modal
+    ></div>
+
+    <section
+      class="modal-box"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalHeading"
+    >
+      <button
+        class="close-modal-button"
+        type="button"
+        data-close-modal
+        aria-label="Close reminder form"
+      >
+        ×
+      </button>
+
+      <h2 id="modalHeading">
+        Create Reminder
+      </h2>
+
+      <p class="modal-description">
+        Add an important settlement task or deadline.
+      </p>
+
+      <form id="reminderForm">
+
+        <div class="form-group">
+          <label for="reminderTitle">
+            Reminder title
+          </label>
+
+          <input
+            id="reminderTitle"
+            name="title"
+            type="text"
+            maxlength="80"
+            placeholder="Example: Renew OSHC"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="reminderDate">
+            Due date
+          </label>
+
+          <input
+            id="reminderDate"
+            name="date"
+            type="date"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="reminderCategory">
+            Category
+          </label>
+
+          <select
+            id="reminderCategory"
+            name="category"
+            required
+          >
+            <option value="visa">Visa</option>
+            <option value="study">Study</option>
+            <option value="health">Health</option>
+            <option value="housing">Housing</option>
+            <option value="transport">Transport</option>
+            <option value="general">General</option>
+          </select>
+        </div>
+
+        <div class="form-buttons">
+
+          <button
+            class="cancel-button"
+            type="button"
+            data-close-modal
+          >
+            Cancel
+          </button>
+
+          <button
+            class="save-button"
+            type="submit"
+          >
+            Save Reminder
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <script src="../js/reminders.js"></script>
 </body>
-
 </html>
