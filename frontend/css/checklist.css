@@ -1,0 +1,314 @@
+/* =========================================================
+   SettleSmart — Settlement checklist
+   Values taken directly from the Figma "03 · Checklist" frame.
+   Self-contained: this page does not load dashboard.css.
+   ========================================================= */
+
+:root {
+    --blue: #2563eb;
+    --blue-soft: #eff4ff;
+    --ink: #0f172a;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --canvas: #f8fafc;
+}
+
+/* ---------- Base reset ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+/* ---------- Shell ---------- */
+
+.app {
+    display: flex;
+    align-items: stretch;
+    min-height: 100vh;
+    background: var(--canvas);
+    font-family: "Poppins", sans-serif;
+}
+
+.app :where(p, h1, h2) {
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+    line-height: 1.4;
+}
+
+.app a { text-decoration: none; }
+
+/* ---------- Sidebar ---------- */
+
+.sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background: #fff;
+    border-right: 1px solid var(--border);
+    padding: 28px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px 24px;
+}
+
+.logo-mark {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background: var(--blue);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.logo-text {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.nav-link {
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    transition: background .15s, color .15s;
+}
+
+.nav-link:hover {
+    background: #f1f5f9;
+    color: var(--ink);
+}
+
+.nav-link.active {
+    background: var(--blue-soft);
+    color: var(--blue);
+    font-weight: 600;
+}
+
+/* ---------- Main ---------- */
+
+.main {
+    flex: 1;
+    min-width: 0;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ---------- Page header ---------- */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.page-subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    background: var(--blue-soft);
+    color: var(--blue);
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ---------- Filter chips ---------- */
+
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chip {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background .15s, color .15s, border-color .15s;
+}
+
+.chip:hover {
+    border-color: #cbd5e1;
+    color: var(--ink);
+}
+
+.chip.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+}
+
+/* ---------- Task groups ---------- */
+
+.task-group {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.group-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.group-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+.group-count {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+/* ---------- Task rows ---------- */
+
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: var(--canvas);
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.task-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.task-box {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: background .15s, border-color .15s;
+}
+
+.task-box:hover { border-color: var(--blue); }
+
+.task-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.task-desc {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+}
+
+/* Completed — filled blue box, title greys out */
+
+.task-item.done .task-box {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+}
+
+.task-item.done .task-title { color: var(--muted); }
+
+/* ---------- Location badge ---------- */
+
+.task-badge {
+    background: var(--blue-soft);
+    color: var(--blue);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* ---------- Empty state ---------- */
+
+.empty-state {
+    display: none;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.empty-state.show { display: block; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { padding: 20px; }
+}
+
+@media (max-width: 700px) {
+    .task-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .task-badge { margin-left: 32px; }
+}

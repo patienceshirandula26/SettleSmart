@@ -4,16 +4,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist | SettleSmart</title>
+    <title>Settlement Checklist | SettleSmart</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/checklist.css">
 </head>
 
 <body>
 
-<h1>Checklist</h1>
+<div class="app">
 
-<script src="../js/script.js"></script>
+    <!-- ============ Sidebar ============ -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-mark">S</span>
+            <span class="logo-text">SettleSmart</span>
+        </div>
+
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="checklist.html" class="nav-link active">Checklist</a>
+        <a href="documents.html" class="nav-link">Documents</a>
+        <a href="resources.html" class="nav-link">Guide</a>
+        <a href="reminders.html" class="nav-link">Reminders</a>
+
+    </aside>
+
+    <!-- ============ Main ============ -->
+    <main class="main">
+
+        <header class="page-header">
+            <div>
+                <h1 class="page-title">Settlement checklist</h1>
+                <p class="page-subtitle">Track the essential setup tasks after arriving in Australia.</p>
+            </div>
+            <div class="avatar">AM</div>
+        </header>
+
+        <div class="filter-bar">
+            <button class="chip active" type="button" data-filter="all">All</button>
+            <button class="chip" type="button" data-filter="identity">Identity &amp; Study</button>
+            <button class="chip" type="button" data-filter="financial">Financial</button>
+            <button class="chip" type="button" data-filter="transport">Transport</button>
+            <button class="chip" type="button" data-filter="health">Health</button>
+            <button class="chip" type="button" data-filter="accommodation">Accommodation</button>
+            <button class="chip" type="button" data-filter="clearances">Work Clearances</button>
+            <button class="chip" type="button" data-filter="employment">Employment</button>
+        </div>
+
+        <section class="task-group" data-category="identity">
+
+            <div class="group-header">
+                <h2 class="group-name">Identity &amp; Study</h2>
+                <span class="group-count"><span class="done-count">3</span> of 3 done</span>
+            </div>
+
+            <div class="task-item done">
+                <div class="task-main">
+                    <button class="task-box" type="button" aria-label="Toggle Get your USI">&#10003;</button>
+                    <div>
+                        <p class="task-title">Get your USI</p>
+                        <p class="task-desc">Unique Student Identifier for your studies</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-item done">
+                <div class="task-main">
+                    <button class="task-box" type="button" aria-label="Toggle Collect Student ID card">&#10003;</button>
+                    <div>
+                        <p class="task-title">Collect Student ID card</p>
+                        <p class="task-desc">Available from campus student services</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-item done">
+                <div class="task-main">
+                    <button class="task-box" type="button" aria-label="Toggle Organise passport &amp; visa copies">&#10003;</button>
+                    <div>
+                        <p class="task-title">Organise passport &amp; visa copies</p>
+                        <p class="task-desc">Keep digital and physical copies</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="task-group" data-category="financial">
+
+            <div class="group-header">
+                <h2 class="group-name">Financial</h2>
+                <span class="group-count"><span class="done-count">1</span> of 3 done</span>
+            </div>
+
+            <div class="task-item">
+                <div class="task-main">
+                    <button class="task-box" type="button" aria-label="Toggle Apply for TFN">&#10003;</button>
+                    <div>
+                        <p class="task-title">Apply for TFN</p>
+                        <p class="task-desc">Can be completed at nearby transport &amp; government service centres</p>
+                    </div>
+                </div>
+                <span class="task-badge">Service centre</span>
+            </div>
+
+            <div class="task-item done">
+                <div class="task-main">
+                    <button class="task-box" type="button" aria-label="Toggle Open a bank account">&#10003;</button>
+                    <div>
+                        <p class="task-title">Open a bank account</p>
+                        <p class="task-desc">Bring your passport and CoE</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-item">
+                <div class="task-main">
+                    <button class="task-box" type="button" aria-label="Toggle Wait for bank card arrival">&#10003;</button>
+                    <div>
+                        <p class="task-title">Wait for bank card arrival</p>
+                        <p class="task-desc">Usually 5–7 business days</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="task-group" data-category="transport">
+
+            <div class="group-header">
+                <h2 class="group-name">Transport &amp; Licensing</h2>
+                <span class="group-count"><span class="done-count">1</span> of 2 done</span>
+            </div>
+
+            <div class="task-item done">
+                <div class="task-main">
+                    <button class="task-box" type="button" aria-label="Toggle Set up Go Card">&#10003;</button>
+                    <div>
+                        <p class="task-title">Set up Go Card</p>
+                        <p class="task-desc">Top up online or at stations</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-item">
+                <div class="task-main">
+                    <button class="task-box" type="button" aria-label="Toggle Verify international driver licence">&#10003;</button>
+                    <div>
+                        <p class="task-title">Verify international driver licence</p>
+                        <p class="task-desc">Verified at transport department service centres</p>
+                    </div>
+                </div>
+                <span class="task-badge">Service centre</span>
+            </div>
+
+        </section>
+
+        <p class="empty-state">No tasks in this category yet.</p>
+
+    </main>
+
+</div>
+
+<script src="../js/checklist.js"></script>
 
 </body>
 
