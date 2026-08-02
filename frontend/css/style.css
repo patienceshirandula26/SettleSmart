@@ -141,6 +141,17 @@ p{
     margin: 0;
 }
 
+.logout-link {
+    display: block;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e2e8f0;
+    color: #ef4444;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+}
+
 .main-content {
     flex: 1;
     padding: 40px;
