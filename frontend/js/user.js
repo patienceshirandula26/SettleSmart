@@ -50,4 +50,18 @@ if (!loggedInUser) {
             localStorage.removeItem("user");
         });
     });
+
+    // The generic topbar search box doesn't have anywhere on-page to search
+    // (dashboard, profile, resources, settings). Pressing Enter jumps to the
+    // Documents page and re-uses its existing search/filter there.
+    document.querySelectorAll(".search-box input[type='search']").forEach((input) => {
+        input.addEventListener("keydown", (event) => {
+            if (event.key !== "Enter") return;
+
+            const query = input.value.trim();
+            if (!query) return;
+
+            window.location.href = `documents.html?q=${encodeURIComponent(query)}`;
+        });
+    });
 }
