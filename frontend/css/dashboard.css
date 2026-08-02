@@ -529,6 +529,7 @@
     font-size: 15px;
     font-weight: 600;
     color: #ffffff;
+    text-decoration: none;
     cursor: pointer;
     transition: transform .15s, filter .15s;
 }

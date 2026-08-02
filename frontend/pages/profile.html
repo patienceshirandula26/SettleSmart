@@ -76,13 +76,17 @@
         </section>
 
         <section class="profile-summary card">
-            <div class="profile-avatar" data-user-initials>ST</div>
+            <div class="profile-summary-left">
+                <div class="profile-avatar" data-user-initials>ST</div>
 
-            <div>
-                <h2 data-user-name>Student</h2>
-                <p>International Student · Queensland</p>
-                <span class="verified-badge">Verified</span>
+                <div>
+                    <h2 data-user-name>Student</h2>
+                    <p>International Student · Queensland</p>
+                    <span class="verified-badge">Verified</span>
+                </div>
             </div>
+
+            <button type="button" class="btn-edit-profile" id="editProfileBtn">Edit Profile</button>
         </section>
 
         <section class="profile-stats">
@@ -102,13 +106,14 @@
             </article>
         </section>
 
-        <section class="card profile-section">
+        <section class="card profile-section" id="personalInfoSection">
             <h2>Personal Information</h2>
 
             <div class="profile-row">
                 <div>
                     <span>Full Name</span>
                     <p data-user-name>Student</p>
+                    <input type="text" class="profile-edit-input" id="editFullName" hidden>
                 </div>
             </div>
 
@@ -123,6 +128,7 @@
                 <div>
                     <span>University</span>
                     <p data-user-university>University</p>
+                    <input type="text" class="profile-edit-input" id="editUniversity" hidden>
                 </div>
             </div>
 
@@ -130,7 +136,13 @@
                 <div>
                     <span>Arrival Date</span>
                     <p data-user-arrival>Not available</p>
+                    <input type="date" class="profile-edit-input" id="editArrival" hidden>
                 </div>
+            </div>
+
+            <div class="profile-edit-actions" id="profileEditActions" hidden>
+                <button type="button" class="btn-cancel" id="cancelEditProfile">Cancel</button>
+                <button type="button" class="btn-save-profile" id="saveProfileBtn">Save changes</button>
             </div>
         </section>
 
