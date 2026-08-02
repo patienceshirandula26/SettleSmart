@@ -1,15 +1,17 @@
 // SettleSmart — Documents page
-// Loads a user's documents from the backend, renders them, and
-// wires up category filtering, search, status toggling and the
-// "Add document" modal.
+// Loads a user's documents from the backend, renders them to match
+// the "Uploaded Documents" list, and wires up the stat cards,
+// click-to-filter category pills, click-to-cycle status, and the
+// "Add Document" modal.
 
 const API_BASE = "http://127.0.0.1:5000";
 
 const loggedInUser = JSON.parse(localStorage.getItem("user"));
-const tableBody = document.getElementById("documentsTableBody");
+const listEl = document.getElementById("documentsList");
 const emptyState = document.getElementById("documentsEmpty");
-const filterBar = document.getElementById("categoryFilterBar");
-const searchInput = document.getElementById("documentSearch");
+const subtitleEl = document.getElementById("documentsSubtitle");
+const statUploaded = document.getElementById("statUploaded");
+const statPending = document.getElementById("statPending");
 
 const modal = document.getElementById("addDocumentModal");
 const addBtn = document.getElementById("addDocumentBtn");
@@ -26,43 +28,29 @@ function statusClass(status) {
 }
 
 function statusLabel(status) {
-    return status === "Not Required" ? "Not required" : status;
+    if (status === "Completed") return "Verified";
+    if (status === "Not Required") return "Not required";
+    return "Pending";
 }
 
-function renderCategoryChips() {
-    const categories = Array.from(
-        new Set(allDocuments.map((doc) => doc.document_type).filter(Boolean))
-    );
+function formatDate(value) {
+    if (!value) return "—";
+    const date = new Date(value);
+    if (isNaN(date)) return "—";
+    return date.toLocaleDateString("en-AU", { day: "numeric", month: "short", year: "numeric" });
+}
 
-    filterBar.innerHTML = "";
+function getQueryParam() {
+    return new URLSearchParams(window.location.search).get("q") || "";
+}
 
-    const allChip = document.createElement("button");
-    allChip.type = "button";
-    allChip.className = "filter-chip" + (activeCategory === "all" ? " active" : "");
-    allChip.dataset.category = "all";
-    allChip.textContent = "All";
-    filterBar.appendChild(allChip);
-
-    categories.forEach((category) => {
-        const chip = document.createElement("button");
-        chip.type = "button";
-        chip.className = "filter-chip" + (activeCategory === category ? " active" : "");
-        chip.dataset.category = category;
-        chip.textContent = category;
-        filterBar.appendChild(chip);
-    });
-
-    filterBar.querySelectorAll(".filter-chip").forEach((chip) => {
-        chip.addEventListener("click", function () {
-            activeCategory = chip.dataset.category;
-            renderCategoryChips();
-            renderRows();
-        });
-    });
+function renderStats() {
+    statUploaded.textContent = allDocuments.length;
+    statPending.textContent = allDocuments.filter((doc) => doc.status === "Pending").length;
 }
 
 function renderRows() {
-    const query = (searchInput.value || "").trim().toLowerCase();
+    const query = getQueryParam().trim().toLowerCase();
 
     const visible = allDocuments.filter((doc) => {
         const matchesCategory = activeCategory === "all" || doc.document_type === activeCategory;
@@ -71,29 +59,48 @@ function renderRows() {
         return matchesCategory && matchesSearch;
     });
 
-    tableBody.innerHTML = "";
+    listEl.innerHTML = "";
 
     visible.forEach((doc) => {
-        const row = document.createElement("tr");
+        const row = document.createElement("div");
+        row.className = "document-row" + (doc.notes ? " flagged" : "");
 
         row.innerHTML = `
-            <td>${doc.document_name}</td>
-            <td>${doc.document_type || "—"}</td>
-            <td>
-                <span class="status-badge ${statusClass(doc.status)} status-toggle" data-id="${doc.document_id}" data-status="${doc.status}" title="Click to change status">
-                    ${statusLabel(doc.status)}
-                </span>
-            </td>
-            <td>${doc.notes || "—"}</td>
+            <div class="doc-name-col">
+                <p class="doc-name">${doc.document_name}</p>
+                ${doc.notes ? `<p class="doc-flag-note">⚠ ${doc.notes}</p>` : ""}
+            </div>
+            <button type="button" class="doc-category-pill" data-category="${doc.document_type || ""}">${doc.document_type || "—"}</button>
+            <button type="button" class="doc-status-pill ${statusClass(doc.status)} status-toggle" data-id="${doc.document_id}" data-status="${doc.status}" title="Click to change status">
+                ${statusLabel(doc.status)}
+            </button>
+            <span class="doc-date">${formatDate(doc.created_at)}</span>
         `;
 
-        tableBody.appendChild(row);
+        listEl.appendChild(row);
     });
 
-    emptyState.hidden = visible.length !== 0;
+    const subtitleParts = [];
+    subtitleParts.push(`${allDocuments.length} document${allDocuments.length === 1 ? "" : "s"}`);
+    if (activeCategory !== "all") subtitleParts.push(`filtered by ${activeCategory}`);
+    if (query) subtitleParts.push(`matching "${query}"`);
+    subtitleEl.textContent = subtitleParts.join(" · ");
 
-    tableBody.querySelectorAll(".status-toggle").forEach((badge) => {
+    emptyState.hidden = visible.length !== 0 || allDocuments.length === 0;
+    if (allDocuments.length !== 0 && visible.length === 0) {
+        emptyState.hidden = false;
+        emptyState.textContent = "No documents match that search or filter.";
+    }
+
+    listEl.querySelectorAll(".status-toggle").forEach((badge) => {
         badge.addEventListener("click", handleStatusClick);
+    });
+
+    listEl.querySelectorAll(".doc-category-pill").forEach((pill) => {
+        pill.addEventListener("click", () => {
+            activeCategory = activeCategory === pill.dataset.category ? "all" : pill.dataset.category;
+            renderRows();
+        });
     });
 }
 
@@ -120,10 +127,11 @@ async function handleStatusClick(event) {
         const doc = allDocuments.find((d) => String(d.document_id) === String(documentId));
         if (doc) doc.status = newStatus;
 
+        renderStats();
         renderRows();
     } catch (error) {
         console.error(error);
-        alert("Could not update status. Is the backend server running?");
+        alert("Could not update status. Make sure the Flask backend is running (python3 backend/app.py) and has been restarted since the update.");
     }
 }
 
@@ -135,21 +143,13 @@ async function loadDocuments() {
         if (!response.ok) throw new Error("Failed to load documents");
 
         allDocuments = await response.json();
-        renderCategoryChips();
-        applyQueryParam();
+        renderStats();
         renderRows();
     } catch (error) {
         console.error(error);
-        emptyState.textContent = "Couldn't load documents — is the backend server running?";
+        subtitleEl.textContent = "Couldn't load documents";
         emptyState.hidden = false;
-    }
-}
-
-function applyQueryParam() {
-    const params = new URLSearchParams(window.location.search);
-    const query = params.get("q");
-    if (query) {
-        searchInput.value = query;
+        emptyState.textContent = "Couldn't reach the backend. Make sure python3 backend/app.py is running.";
     }
 }
 
@@ -189,12 +189,11 @@ async function handleAddDocument(event) {
         await loadDocuments();
     } catch (error) {
         console.error(error);
-        alert("Could not add the document. Is the backend server running?");
+        alert("Could not add the document. Make sure the Flask backend is running (python3 backend/app.py) and has been restarted since the update.");
     }
 }
 
-if (tableBody) {
-    searchInput.addEventListener("input", renderRows);
+if (listEl) {
     addBtn.addEventListener("click", openModal);
     cancelBtn.addEventListener("click", closeModal);
     modal.addEventListener("click", (event) => {

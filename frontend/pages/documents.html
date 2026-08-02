@@ -6,74 +6,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documents | SettleSmart</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/documents.css">
 </head>
 
 <body>
 
 <div class="dashboard">
 
-<aside class="sidebar">
+    <aside class="sidebar">
 
-    <div class="logo">
-        🌐
-        <span>SettleSmart</span>
-    </div>
+        <div class="logo">
+            <span class="logo-mark">S</span>
+            <span class="logo-text">SettleSmart</span>
+        </div>
 
-    <nav class="nav-menu">
-        <a href="dashboard.html" class="nav-link">Dashboard</a>
-        <a href="checklist.html" class="nav-link">Settlement Checklist</a>
-        <a href="documents.html" class="nav-link active">Documents</a>
-        <a href="reminders.html" class="nav-link">Reminders</a>
-        <a href="resources.html" class="nav-link">Official Resources</a>
-        <a href="profile.html" class="nav-link">Profile</a>
-        <a href="settings.html" class="nav-link">Settings</a>
-    </nav>
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="checklist.html" class="nav-link">Settlement Checklist</a>
+            <a href="documents.html" class="nav-link active">Documents</a>
+            <a href="reminders.html" class="nav-link">Reminders</a>
+            <a href="resources.html" class="nav-link">Official Resources</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+            <a href="settings.html" class="nav-link">Settings</a>
+        </nav>
 
-    <div class="sidebar-user">
-    <div class="avatar" data-user-initials>ST</div>
-    <div>
-        <h4 data-user-name>Student</h4>
-        <p>Int. Student · QLD</p>
-    </div>
-</div>
+        <div class="sidebar-spacer"></div>
 
-<a href="../index.html" class="logout-link">Logout</a>
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="avatar" data-user-initials>ST</div>
+                <div>
+                    <p class="sidebar-user-name" data-user-name>Student</p>
+                    <p class="sidebar-user-role">Int. Student · QLD</p>
+                </div>
+            </div>
 
-</aside>
+            <a href="../index.html" class="logout-link">Logout</a>
+        </div>
+
+    </aside>
 
     <main class="main-content">
 
-        <div class="page-header">
-            <div>
-                <h1>Document & card tracker</h1>
-                <p>Keep track of what you have applied for or received.</p>
+        <header class="topbar">
+            <label class="search-box">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="7"/>
+                    <path d="m20 20-3.5-3.5" stroke-linecap="round"/>
+                </svg>
+                <input type="search" placeholder="Search tasks, documents…" aria-label="Search tasks and documents">
+            </label>
+
+            <div class="topbar-right">
+                <button class="bell" type="button" aria-label="Notifications">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" stroke-linecap="round"/>
+                    </svg>
+                    <span class="bell-dot"></span>
+                </button>
+
+                <div class="avatar" data-user-initials>ST</div>
+
+                <div>
+                    <p class="topbar-name" data-user-name>Student</p>
+                    <p class="topbar-role">Student</p>
+                </div>
             </div>
-            <div class="avatar" data-user-initials>ST</div>
-        </div>
+        </header>
 
-        <div class="documents-toolbar">
-            <input type="text" id="documentSearch" class="search-input" placeholder="Search documents...">
-            <button type="button" class="btn btn-add" id="addDocumentBtn">+ Add document</button>
-        </div>
+        <section class="page-heading">
+            <h1>My Documents</h1>
+            <p>Upload and manage your important documents securely.</p>
+        </section>
 
-        <div class="category-filter-bar" id="categoryFilterBar">
-            <button type="button" class="filter-chip active" data-category="all">All</button>
-        </div>
+        <section class="doc-stats-row">
+            <div class="card doc-stat">
+                <span class="doc-stat-icon green">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="m8.5 12 2.5 2.5 4.5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <div>
+                    <strong id="statUploaded">0</strong>
+                    <span>Documents Uploaded</span>
+                </div>
+            </div>
 
-        <p id="documentsEmpty" class="documents-empty" hidden>No documents yet — add your first one above.</p>
+            <div class="card doc-stat">
+                <span class="doc-stat-icon amber">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 7v5l3 3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <div>
+                    <strong id="statPending">0</strong>
+                    <span>Pending Review</span>
+                </div>
+            </div>
+        </section>
 
-        <table class="documents-table" id="documentsTable">
-            <thead>
-                <tr>
-                    <th>Document / Card</th>
-                    <th>Category</th>
-                    <th>Status</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody id="documentsTableBody"></tbody>
-        </table>
+        <button type="button" class="btn-add-document" id="addDocumentBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="m7 8 5-5 5 5M12 3v12" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Add Document
+        </button>
+
+        <section class="card documents-card">
+            <div class="section-header">
+                <div>
+                    <h2 class="card-title">Uploaded Documents</h2>
+                    <p class="card-subtitle" id="documentsSubtitle">Loading…</p>
+                </div>
+            </div>
+
+            <div class="documents-list-header">
+                <span>Document</span>
+                <span>Category</span>
+                <span>Status</span>
+                <span>Uploaded</span>
+            </div>
+
+            <div id="documentsList"></div>
+
+            <p id="documentsEmpty" class="documents-empty" hidden>No documents yet — click "Add Document" above to get started.</p>
+        </section>
 
     </main>
 
@@ -99,7 +165,7 @@
                 <label for="docStatus">Status</label>
                 <select id="docStatus" name="status">
                     <option value="Pending">Pending</option>
-                    <option value="Completed">Completed</option>
+                    <option value="Completed">Verified</option>
                     <option value="Not Required">Not required</option>
                 </select>
             </div>
@@ -111,14 +177,13 @@
 
             <div class="modal-actions">
                 <button type="button" class="btn-cancel" id="cancelAddDocument">Cancel</button>
-                <button type="submit" class="btn btn-add">Add document</button>
+                <button type="submit" class="btn-save-profile">Add document</button>
             </div>
         </form>
     </div>
 </div>
 
 <script src="../js/user.js"></script>
-<script src="../js/script.js"></script>
 <script src="../js/documents.js"></script>
 
 </body>
