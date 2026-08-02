@@ -6,7 +6,7 @@
 
 const API_BASE = "http://127.0.0.1:5000";
 
-const loggedInUser = JSON.parse(localStorage.getItem("user"));
+const documentsPageUser = JSON.parse(localStorage.getItem("user"));
 const listEl = document.getElementById("documentsList");
 const emptyState = document.getElementById("documentsEmpty");
 const subtitleEl = document.getElementById("documentsSubtitle");
@@ -136,10 +136,10 @@ async function handleStatusClick(event) {
 }
 
 async function loadDocuments() {
-    if (!loggedInUser) return;
+    if (!documentsPageUser) return;
 
     try {
-        const response = await fetch(`${API_BASE}/api/documents/${loggedInUser.user_id}`);
+        const response = await fetch(`${API_BASE}/api/documents/${documentsPageUser.user_id}`);
         if (!response.ok) throw new Error("Failed to load documents");
 
         allDocuments = await response.json();
@@ -165,11 +165,11 @@ function closeModal() {
 async function handleAddDocument(event) {
     event.preventDefault();
 
-    if (!loggedInUser) return;
+    if (!documentsPageUser) return;
 
     const formData = new FormData(addForm);
     const payload = {
-        user_id: loggedInUser.user_id,
+        user_id: documentsPageUser.user_id,
         document_name: formData.get("document_name"),
         document_type: formData.get("document_type"),
         status: formData.get("status"),
