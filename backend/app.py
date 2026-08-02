@@ -40,6 +40,58 @@ def get_users():
     finally:
         connection.close()
 
+@app.route("/api/register", methods=["POST"])
+def register():
+    data = request.get_json()
+
+    full_name = data.get("full_name")
+    email = data.get("email")
+    password = data.get("password")
+    university = data.get("university")
+
+    if not full_name or not email or not password:
+        return jsonify({
+            "success": False,
+            "message": "Full name, email and password are required"
+        }), 400
+
+    connection = get_connection()
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT user_id FROM users WHERE email = %s", (email,))
+
+            if cursor.fetchone():
+                return jsonify({
+                    "success": False,
+                    "message": "An account with that email already exists"
+                }), 409
+
+            cursor.execute("""
+                INSERT INTO users (full_name, email, password, university)
+                VALUES (%s, %s, %s, %s)
+            """, (full_name, email, password, university))
+
+            connection.commit()
+
+            cursor.execute("""
+                SELECT user_id, full_name, email, university, arrival_date
+                FROM users
+                WHERE user_id = %s
+            """, (cursor.lastrowid,))
+
+            user = cursor.fetchone()
+
+        return jsonify({
+            "success": True,
+            "message": "Account created successfully",
+            "user": user
+        }), 201
+
+    finally:
+        connection.close()
+
+
 @app.route("/api/login", methods=["POST"])
 def login():
     data = request.get_json()
