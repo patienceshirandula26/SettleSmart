@@ -478,6 +478,17 @@ p{
     text-decoration: underline;
 }
 
+.form-message {
+    font-size: 13px;
+    color: #dc2626;
+    margin-bottom: 14px;
+    margin-top: -6px;
+}
+
+.form-message:empty {
+    display: none;
+}
+
 .btn-block {
     width: 100%;
     text-align: center;
