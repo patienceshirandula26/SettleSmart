@@ -417,5 +417,56 @@ def get_profile(user_id):
     finally:
         connection.close()
 
+# ==========================================
+# UPDATE USER PROFILE
+# Lets a logged-in user edit their own details
+# ==========================================
+@app.route("/api/profile/<int:user_id>", methods=["PUT"])
+def update_profile(user_id):
+
+    data = request.get_json()
+
+    full_name = data.get("full_name")
+    university = data.get("university")
+    arrival_date = data.get("arrival_date") or None
+
+    if not full_name:
+        return jsonify({
+            "success": False,
+            "message": "Full name is required"
+        }), 400
+
+    connection = get_connection()
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                UPDATE users
+                SET full_name = %s,
+                    university = %s,
+                    arrival_date = %s
+                WHERE user_id = %s
+            """, (full_name, university, arrival_date, user_id))
+
+            connection.commit()
+
+            cursor.execute("""
+                SELECT user_id, full_name, email, university, arrival_date, created_at
+                FROM users
+                WHERE user_id = %s
+            """, (user_id,))
+
+            user = cursor.fetchone()
+
+        return jsonify({
+            "success": True,
+            "message": "Profile updated successfully.",
+            "user": user
+        })
+
+    finally:
+        connection.close()
+
+
 if __name__ == "__main__":
     app.run(debug=True)
