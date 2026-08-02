@@ -6,15 +6,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile | SettleSmart</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/profile.css">
 </head>
 
 <body>
 
-<h1>Profile</h1>
+<div class="dashboard">
 
-<script src="../js/script.js"></script>
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span class="logo-mark">S</span>
+            <span class="logo-text">SettleSmart</span>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="checklist.html" class="nav-link">Settlement Checklist</a>
+            <a href="documents.html" class="nav-link">Documents</a>
+            <a href="reminders.html" class="nav-link">Reminders</a>
+            <a href="resources.html" class="nav-link">Official Resources</a>
+            <a href="profile.html" class="nav-link active">Profile</a>
+            <a href="settings.html" class="nav-link">Settings</a>
+        </nav>
+
+        <div class="sidebar-spacer"></div>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="avatar" data-user-initials>ST</div>
+                <div>
+                    <p class="sidebar-user-name" data-user-name>Student</p>
+                    <p class="sidebar-user-role">International Student</p>
+                </div>
+            </div>
+
+            <a href="../index.html" class="logout-link" id="logoutLink">
+                Logout
+            </a>
+        </div>
+
+    </aside>
+
+    <main class="main-content profile-main">
+
+        <header class="topbar">
+            <label class="search-box">
+                <input type="search" placeholder="Search tasks, documents...">
+            </label>
+
+            <div class="topbar-right">
+                <div class="avatar" data-user-initials>ST</div>
+
+                <div>
+                    <p class="topbar-name" data-user-name>Student</p>
+                    <p class="topbar-role">Student</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="profile-heading">
+            <h1>Profile</h1>
+            <p>Your personal information and settlement details.</p>
+        </section>
+
+        <section class="profile-summary card">
+            <div class="profile-avatar" data-user-initials>ST</div>
+
+            <div>
+                <h2 data-user-name>Student</h2>
+                <p>International Student · Queensland</p>
+                <span class="verified-badge">Verified</span>
+            </div>
+        </section>
+
+        <section class="profile-stats">
+            <article class="card profile-stat">
+                <strong>85%</strong>
+                <span>Profile Completion</span>
+            </article>
+
+            <article class="card profile-stat">
+                <strong>10</strong>
+                <span>Documents Recorded</span>
+            </article>
+
+            <article class="card profile-stat">
+                <strong>15/20</strong>
+                <span>Tasks Completed</span>
+            </article>
+        </section>
+
+        <section class="card profile-section">
+            <h2>Personal Information</h2>
+
+            <div class="profile-row">
+                <div>
+                    <span>Full Name</span>
+                    <p data-user-name>Student</p>
+                </div>
+            </div>
+
+            <div class="profile-row">
+                <div>
+                    <span>Email Address</span>
+                    <p data-user-email>student@email.com</p>
+                </div>
+            </div>
+
+            <div class="profile-row">
+                <div>
+                    <span>University</span>
+                    <p data-user-university>University</p>
+                </div>
+            </div>
+
+            <div class="profile-row">
+                <div>
+                    <span>Arrival Date</span>
+                    <p data-user-arrival>Not available</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+</div>
+
+<script src="../js/user.js"></script>
+<script src="../js/profile.js"></script>
 
 </body>
-
 </html>
