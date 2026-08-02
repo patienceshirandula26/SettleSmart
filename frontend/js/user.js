@@ -43,4 +43,11 @@ if (!loggedInUser) {
     document.querySelectorAll("[data-user-welcome]").forEach((element) => {
         element.textContent = `Welcome back, ${fullName.split(" ")[0]} 👋`;
     });
+
+    // Any element with class "logout-link" clears the session, on every page.
+    document.querySelectorAll(".logout-link").forEach((link) => {
+        link.addEventListener("click", function () {
+            localStorage.removeItem("user");
+        });
+    });
 }
