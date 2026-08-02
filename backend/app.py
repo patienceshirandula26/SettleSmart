@@ -212,6 +212,86 @@ def get_documents(user_id):
         connection.close()
 
 # ==========================================
+# ADD A NEW DOCUMENT
+# Creates a document/card record for a user
+# ==========================================
+@app.route("/api/documents", methods=["POST"])
+def add_document():
+
+    data = request.get_json()
+
+    user_id = data.get("user_id")
+    document_name = data.get("document_name")
+    document_type = data.get("document_type")
+    status = data.get("status") or "Pending"
+    reference_number = data.get("reference_number")
+    provider = data.get("provider")
+    notes = data.get("notes")
+
+    if not user_id or not document_name:
+        return jsonify({
+            "success": False,
+            "message": "user_id and document_name are required"
+        }), 400
+
+    connection = get_connection()
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                INSERT INTO documents
+                (user_id, document_name, document_type, status, reference_number, provider, notes)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """, (user_id, document_name, document_type, status, reference_number, provider, notes))
+
+            connection.commit()
+            new_id = cursor.lastrowid
+
+        return jsonify({
+            "success": True,
+            "message": "Document added successfully.",
+            "document_id": new_id
+        }), 201
+
+    finally:
+        connection.close()
+
+# ==========================================
+# UPDATE A DOCUMENT'S STATUS
+# ==========================================
+@app.route("/api/documents/status/<int:document_id>", methods=["PUT"])
+def update_document_status(document_id):
+
+    data = request.get_json()
+    status = data.get("status")
+
+    if status not in ("Pending", "Completed", "Not Required"):
+        return jsonify({
+            "success": False,
+            "message": "status must be Pending, Completed or Not Required"
+        }), 400
+
+    connection = get_connection()
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                UPDATE documents
+                SET status = %s
+                WHERE document_id = %s
+            """, (status, document_id))
+
+            connection.commit()
+
+        return jsonify({
+            "success": True,
+            "message": "Document status updated."
+        })
+
+    finally:
+        connection.close()
+
+# ==========================================
 # GET ALL RESOURCES
 # Returns settlement resources grouped by category
 # ==========================================
