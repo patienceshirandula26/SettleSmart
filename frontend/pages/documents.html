@@ -54,10 +54,16 @@
 
         <div class="documents-toolbar">
             <input type="text" id="documentSearch" class="search-input" placeholder="Search documents...">
-            <button type="button" class="btn btn-add">+ Add document</button>
+            <button type="button" class="btn btn-add" id="addDocumentBtn">+ Add document</button>
         </div>
 
-        <table class="documents-table">
+        <div class="category-filter-bar" id="categoryFilterBar">
+            <button type="button" class="filter-chip active" data-category="all">All</button>
+        </div>
+
+        <p id="documentsEmpty" class="documents-empty" hidden>No documents yet — add your first one above.</p>
+
+        <table class="documents-table" id="documentsTable">
             <thead>
                 <tr>
                     <th>Document / Card</th>
@@ -66,76 +72,54 @@
                     <th>Notes</th>
                 </tr>
             </thead>
-            <tbody id="documentsTableBody">
-                <tr>
-                    <td>USI</td>
-                    <td>Identity & Study</td>
-                    <td><span class="status-badge status-completed">Completed</span></td>
-                    <td>Linked to university enrolment</td>
-                </tr>
-                <tr>
-                    <td>Student ID card</td>
-                    <td>Identity & Study</td>
-                    <td><span class="status-badge status-completed">Completed</span></td>
-                    <td>Collected at orientation week</td>
-                </tr>
-                <tr>
-                    <td>Tax File Number (TFN)</td>
-                    <td>Financial</td>
-                    <td><span class="status-badge status-pending">Pending</span></td>
-                    <td>Apply at nearby transport & government service centre</td>
-                </tr>
-                <tr>
-                    <td>Bank account</td>
-                    <td>Financial</td>
-                    <td><span class="status-badge status-completed">Completed</span></td>
-                    <td>Everyday account opened</td>
-                </tr>
-                <tr>
-                    <td>Go Card</td>
-                    <td>Transport & Licensing</td>
-                    <td><span class="status-badge status-completed">Completed</span></td>
-                    <td>Auto top-up enabled</td>
-                </tr>
-                <tr>
-                    <td>Driver licence verification</td>
-                    <td>Transport & Licensing</td>
-                    <td><span class="status-badge status-pending">Pending</span></td>
-                    <td>Verify at transport service centre</td>
-                </tr>
-                <tr>
-                    <td>OSHC policy</td>
-                    <td>Health</td>
-                    <td><span class="status-badge status-pending">Pending</span></td>
-                    <td>Policy number to be added</td>
-                </tr>
-                <tr>
-                    <td>Blue Card</td>
-                    <td>Work Clearances</td>
-                    <td><span class="status-badge status-pending">Pending</span></td>
-                    <td>Working with Children check</td>
-                </tr>
-                <tr>
-                    <td>Yellow Card (NDIS)</td>
-                    <td>Work Clearances</td>
-                    <td><span class="status-badge status-neutral">Not required</span></td>
-                    <td>—</td>
-                </tr>
-                <tr>
-                    <td>Rental documents</td>
-                    <td>Accommodation</td>
-                    <td><span class="status-badge status-pending">Pending</span></td>
-                    <td>Lease agreement + bond receipt</td>
-                </tr>
-            </tbody>
+            <tbody id="documentsTableBody"></tbody>
         </table>
 
     </main>
 
 </div>
 
+<!-- Add document modal -->
+<div class="modal-overlay" id="addDocumentModal" hidden>
+    <div class="modal-card">
+        <h2>Add a document</h2>
+
+        <form id="addDocumentForm">
+            <div class="form-group">
+                <label for="docName">Document / card name</label>
+                <input type="text" id="docName" name="document_name" required placeholder="e.g. Medicare Card">
+            </div>
+
+            <div class="form-group">
+                <label for="docType">Category</label>
+                <input type="text" id="docType" name="document_type" placeholder="e.g. Health">
+            </div>
+
+            <div class="form-group">
+                <label for="docStatus">Status</label>
+                <select id="docStatus" name="status">
+                    <option value="Pending">Pending</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Not Required">Not required</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="docNotes">Notes</label>
+                <input type="text" id="docNotes" name="notes" placeholder="Optional notes">
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" id="cancelAddDocument">Cancel</button>
+                <button type="submit" class="btn btn-add">Add document</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script src="../js/user.js"></script>
 <script src="../js/script.js"></script>
+<script src="../js/documents.js"></script>
 
 </body>
 
