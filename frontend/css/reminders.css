@@ -750,3 +750,50 @@ a {
     grid-template-columns: 1fr 1fr;
   }
 }
+/* =========================================================
+   Live reminders — extra states
+   ========================================================= */
+
+.reminder-item {
+  padding: 6px 0;
+}
+
+.reminder-dot.financial { background: var(--green, #22c55e); }
+
+.reminder-actions {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.done-reminder-button {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: #9aa6b8;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.done-reminder-button:hover {
+  background: #ecfdf5;
+  color: #16a34a;
+}
+
+.reminder-item.is-done .reminder-title {
+  color: #9aa6b8;
+  text-decoration: line-through;
+}
+
+.reminder-item.is-done .reminder-dot {
+  opacity: .4;
+}
+
+.reminder-date.is-overdue {
+  color: var(--danger, #dc2626);
+  font-weight: 700;
+}

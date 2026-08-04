@@ -1,64 +1,49 @@
-const loginForm = document.getElementById("loginForm");
-const message = document.getElementById("message");
+/* =========================================================
+   SettleSmart — login
+   ========================================================= */
 
-// Handle login only when the current page contains the login form.
+const loginForm = document.getElementById("loginForm");
+const loginMessage = document.getElementById("message");
+
 if (loginForm) {
+    // Already signed in? Skip straight to the dashboard.
+    if (SettleSmart.getUser()) {
+        window.location.href = "dashboard.html";
+    }
+
     loginForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
-        const email = document.getElementById("email").value;
+        const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value;
+        const submitButton = loginForm.querySelector("button[type='submit']");
+
+        showMessage("");
+        setBusy(submitButton, true, "Signing in…");
 
         try {
-            // Send the user's credentials to the Flask login API.
-            const response = await fetch("http://127.0.0.1:5000/api/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password
-                })
-            });
+            const data = await SettleSmart.api.post("/api/login", { email, password });
 
-            const data = await response.json();
-
-            if (data.success) {
-                // Save the logged-in user's details for use on other pages.
-                localStorage.setItem("user", JSON.stringify(data.user));
-
-                // login.html is already inside frontend/pages/.
-                window.location.href = "dashboard.html";
-            } else if (message) {
-                message.textContent = data.message;
-            } else {
-                alert(data.message);
-            }
+            SettleSmart.setUser(data.user);
+            window.location.href = "dashboard.html";
         } catch (error) {
-            if (message) {
-                message.textContent = "Unable to connect to the server.";
-            } else {
-                alert("Unable to connect to the server.");
-            }
-
-            console.error(error);
+            showMessage(error.message);
+            setBusy(submitButton, false, "Log In");
         }
     });
 }
 
-// Filter document rows as the user types in the search box.
-const documentSearch = document.getElementById("documentSearch");
-const documentsTableBody = document.getElementById("documentsTableBody");
+function showMessage(text) {
+    if (loginMessage) {
+        loginMessage.textContent = text;
+    } else if (text) {
+        alert(text);
+    }
+}
 
-if (documentSearch && documentsTableBody) {
-    documentSearch.addEventListener("input", function () {
-        const query = documentSearch.value.trim().toLowerCase();
-        const rows = documentsTableBody.querySelectorAll("tr");
+function setBusy(button, busy, label) {
+    if (!button) return;
 
-        rows.forEach(function (row) {
-            const text = row.textContent.toLowerCase();
-            row.style.display = text.includes(query) ? "" : "none";
-        });
-    });
+    button.disabled = busy;
+    button.textContent = label;
 }

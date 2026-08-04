@@ -4,34 +4,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SettleSmart</title>
+    <title>SettleSmart — Settle into Australia with confidence</title>
+    <meta name="description"
+          content="SettleSmart helps newly arrived international students in Australia track settlement tasks, store documents and never miss a deadline.">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/landing.css">
 </head>
 
 <body>
 
-    <div class="hero">
+<!-- Soft colour washes behind the whole page -->
+<div class="backdrop">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+</div>
 
-        <div class="hero-content">
+<div class="wrap">
 
-            <h1>Welcome to SettleSmart</h1>
-
-            <p>
-                Your personal guide to settling into life in Australia.
-                Track important tasks, manage documents, monitor progress,
-                and access official resources all in one place.
-            </p>
-
-            <a href="pages/login.html" class="btn">
-                Get Started
-            </a>
-
+    <!-- ============ Header ============ -->
+    <header class="site-header">
+        <div class="brand">
+            <span class="brand-mark">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M3 12h18M12 3a13.5 13.5 0 0 1 0 18M12 3a13.5 13.5 0 0 0 0 18" stroke-linecap="round"/>
+                </svg>
+            </span>
+            SettleSmart
         </div>
 
-    </div>
+        <div class="header-actions">
+            <a href="pages/login.html" class="btn btn-ghost btn-sm">Log in</a>
+            <a href="pages/register.html" class="btn btn-primary btn-sm">Get started</a>
+        </div>
+    </header>
 
-    <script src="js/script.js"></script>
+    <!-- ============ Hero ============ -->
+    <section class="hero">
+
+        <div class="hero-copy">
+            <span class="eyebrow">
+                <span class="dot"></span>
+                Built for international students in Queensland
+            </span>
+
+            <h1>
+                Settle into Australia
+                <span class="accent">without the guesswork.</span>
+            </h1>
+
+            <p class="hero-lead">
+                TFN, USI, Go Card, OSHC, bank account, SIM — the paperwork of a new
+                country, gathered into one checklist that remembers where you got to.
+            </p>
+
+            <div class="hero-actions">
+                <a href="pages/register.html" class="btn btn-primary">
+                    Create your free account
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a href="pages/login.html" class="btn btn-ghost">I already have one</a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <strong>19</strong>
+                    <span>Settlement tasks</span>
+                </div>
+                <div class="hero-stat">
+                    <strong>8</strong>
+                    <span>Categories covered</span>
+                </div>
+                <div class="hero-stat">
+                    <strong>17</strong>
+                    <span>Official links</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- A small preview of what the dashboard looks like -->
+        <div class="preview">
+            <div class="preview-head">
+                <div>
+                    <p class="preview-title">Your settlement progress</p>
+                    <p class="preview-sub">Updated as you tick things off</p>
+                </div>
+                <span class="preview-chip">On track</span>
+            </div>
+
+            <div class="ring-row">
+                <div class="ring">
+                    <svg viewBox="0 0 100 100">
+                        <defs>
+                            <linearGradient id="ringGradient" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#2563eb"/>
+                                <stop offset="100%" stop-color="#7c3aed"/>
+                            </linearGradient>
+                        </defs>
+                        <circle class="ring-track" cx="50" cy="50" r="42"/>
+                        <circle class="ring-fill" cx="50" cy="50" r="42"/>
+                    </svg>
+                    <span class="ring-label">70%</span>
+                </div>
+
+                <div class="ring-text">
+                    <strong>13 of 19 tasks done</strong>
+                    <span>Health and Transport complete.<br>Work clearances still to go.</span>
+                </div>
+            </div>
+
+            <div class="preview-list">
+                <div class="preview-item done">
+                    <span class="tick">✓</span>
+                    <span class="preview-name">Apply for TFN</span>
+                    <span class="preview-tag">Financial</span>
+                </div>
+                <div class="preview-item done">
+                    <span class="tick">✓</span>
+                    <span class="preview-name">Activate OSHC</span>
+                    <span class="preview-tag">Health</span>
+                </div>
+                <div class="preview-item">
+                    <span class="tick">✓</span>
+                    <span class="preview-name">Purchase Go Card</span>
+                    <span class="preview-tag due">Due in 3 days</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ============ Features ============ -->
+    <section class="features">
+
+        <div class="section-head reveal">
+            <h2>Everything in one place</h2>
+            <p>
+                No more hunting through university emails, government portals and
+                screenshots to work out what you still have to do.
+            </p>
+        </div>
+
+        <div class="feature-grid">
+
+            <article class="feature reveal">
+                <div class="feature-icon blue">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="4"/>
+                        <path d="m8 12 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>A checklist that saves</h3>
+                <p>
+                    Nineteen tasks across eight categories, each with a due date worked
+                    out from your arrival. Tick one off and your progress is stored.
+                </p>
+            </article>
+
+            <article class="feature reveal">
+                <div class="feature-icon green">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" stroke-linejoin="round"/>
+                        <path d="M14 3v5h5" stroke-linejoin="round"/>
+                        <path d="M9 13h6M9 17h4" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>Your documents, kept safe</h3>
+                <p>
+                    Upload your TFN letter, OSHC certificate, lease or Blue Card, and
+                    find them again in seconds — from any device you log in on.
+                </p>
+            </article>
+
+            <article class="feature reveal">
+                <div class="feature-icon amber">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9a6 6 0 0 1 12 0c0 6 2.5 8 2.5 8h-17S6 15 6 9" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>Deadlines that find you</h3>
+                <p>
+                    Reminders and a notification bell that shows anything overdue or
+                    due this week, so nothing important slips past you.
+                </p>
+            </article>
+
+            <article class="feature reveal">
+                <div class="feature-icon purple">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>Straight to the real source</h3>
+                <p>
+                    Seventeen official links — the ATO, myGov, USI Registry, Translink,
+                    Fair Work and more — so you never end up on the wrong website.
+                </p>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ============ Closing call to action ============ -->
+    <section class="cta reveal">
+        <h2>Start your first week the easy way</h2>
+        <p>
+            Create an account and your checklist, document list and reminders are
+            ready straight away — set up around your own arrival date.
+        </p>
+        <a href="pages/register.html" class="btn">Get started — it's free</a>
+    </section>
+
+    <footer class="site-footer">
+        SettleSmart · CP3404 Agile Software Engineering · James Cook University
+    </footer>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/landing.js"></script>
 
 </body>
 

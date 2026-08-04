@@ -356,3 +356,108 @@ body {
 
     .task-badge { margin-left: 32px; }
 }
+/* =========================================================
+   Live checklist additions
+   ========================================================= */
+
+.checklist-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    margin-bottom: 22px;
+    padding: 20px 22px;
+
+    background: #fff;
+    border: 1px solid var(--line, #e6ecf5);
+    border-radius: 14px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+}
+
+.checklist-summary-label {
+    font-size: 13px;
+    color: var(--muted, #64748b);
+}
+
+.checklist-summary-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink, #0f172a);
+}
+
+.checklist-summary .progress-track {
+    height: 9px;
+    background: #e8eefb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.checklist-summary .progress-fill {
+    height: 100%;
+    background: var(--blue, #2563eb);
+    border-radius: 999px;
+    transition: width .45s ease;
+}
+
+/* Task meta line: time estimate, due date, official link */
+
+.task-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 6px;
+
+    font-size: 12.5px;
+    color: var(--muted, #64748b);
+}
+
+.task-meta a {
+    color: var(--blue, #2563eb);
+    font-weight: 500;
+}
+
+.task-meta .is-overdue {
+    color: #dc2626;
+    font-weight: 600;
+}
+
+.task-item.done .task-meta { opacity: .6; }
+
+/* Priority badges */
+
+.task-badge.priority-high {
+    background: #fee7e7;
+    color: #dc2626;
+}
+
+.task-badge.priority-medium {
+    background: #fef3d3;
+    color: #b45309;
+}
+
+.task-badge.priority-low {
+    background: #f1f5f9;
+    color: var(--muted, #64748b);
+}
+
+.task-box:disabled {
+    opacity: .5;
+    cursor: wait;
+}
+
+/* A task opened from the notification bell flashes so it's easy to spot. */
+
+.task-item.is-highlighted {
+    animation: task-flash 2.6s ease;
+}
+
+@keyframes task-flash {
+    0%, 70% {
+        background: #fef3c7;
+        box-shadow: 0 0 0 2px #fcd34d;
+    }
+    100% {
+        background: transparent;
+        box-shadow: none;
+    }
+}

@@ -41,13 +41,31 @@
             </div>
 
             <div class="form-group">
+                <label for="arrivalDate">Arrival date in Australia <span class="label-hint">(optional)</span></label>
+                <input type="date" id="arrivalDate" name="arrivalDate">
+            </div>
+
+            <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="••••••••" required minlength="6">
+                <input type="password" id="password" name="password" placeholder="••••••••"
+                       required minlength="8" autocomplete="new-password">
+
+                <div class="strength" id="passwordStrength" hidden>
+                    <div class="strength-track"><div class="strength-fill" id="strengthFill"></div></div>
+                    <span class="strength-label" id="strengthLabel"></span>
+                </div>
+
+                <ul class="password-rules" id="passwordRules">
+                    <li data-rule="length">At least 8 characters</li>
+                    <li data-rule="letter">Contains a letter</li>
+                    <li data-rule="number">Contains a number</li>
+                    <li data-rule="personal">Doesn't contain your name or email</li>
+                </ul>
             </div>
 
             <p id="message" class="form-message"></p>
 
-            <button type="submit" class="btn btn-block">Create account</button>
+            <button type="submit" class="btn btn-block">Create Account</button>
 
         </form>
 
@@ -57,6 +75,7 @@
 
 </div>
 
+<script src="../js/api.js"></script>
 <script src="../js/register.js"></script>
 
 </body>

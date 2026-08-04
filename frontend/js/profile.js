@@ -1,104 +1,126 @@
-const currentUser = JSON.parse(localStorage.getItem("user"));
+/* =========================================================
+   SettleSmart — profile
 
-if (currentUser) {
-    fetch(`http://127.0.0.1:5000/api/profile/${currentUser.user_id}`)
-        .then((response) => response.json())
-        .then((user) => {
-            // Save the latest user information returned by the database.
-            localStorage.setItem("user", JSON.stringify(user));
-        })
-        .catch((error) => {
-            console.error("Unable to load profile information:", error);
-        });
-}
+   Shows the student's details and their settlement stats, and
+   lets them edit their own information in place.
+   ========================================================= */
 
-const logoutLink = document.getElementById("logoutLink");
+(function () {
+    "use strict";
 
-if (logoutLink) {
-    logoutLink.addEventListener("click", function () {
-        localStorage.removeItem("user");
-    });
-}
+    const user = SettleSmart.getUser();
+    if (!user) return;
 
-// ---------- Edit profile ----------
+    /* ---------- Stat cards ---------- */
 
-const editProfileBtn = document.getElementById("editProfileBtn");
-const cancelEditProfile = document.getElementById("cancelEditProfile");
-const saveProfileBtn = document.getElementById("saveProfileBtn");
-const profileEditActions = document.getElementById("profileEditActions");
+    async function loadStats() {
+        const progressEl = document.getElementById("statProgress");
+        const docsEl = document.getElementById("statDocs");
+        const tasksEl = document.getElementById("statTasks");
 
-const nameDisplay = document.querySelector("#personalInfoSection [data-user-name]");
-const universityDisplay = document.querySelector("#personalInfoSection [data-user-university]");
-const arrivalDisplay = document.querySelector("#personalInfoSection [data-user-arrival]");
+        if (!progressEl) return;
 
-const editFullName = document.getElementById("editFullName");
-const editUniversity = document.getElementById("editUniversity");
-const editArrival = document.getElementById("editArrival");
+        try {
+            const data = await SettleSmart.api.get(`/api/dashboard/${user.user_id}`);
 
-function enterEditMode() {
-    if (!currentUser) return;
+            progressEl.textContent = `${data.progress.percent}%`;
+            docsEl.textContent =
+                `${data.stats.documents_uploaded}/${data.stats.documents_total}`;
+            tasksEl.textContent =
+                `${data.progress.completed}/${data.progress.total}`;
+        } catch (error) {
+            console.error("Couldn't load profile stats:", error.message);
+        }
+    }
 
-    editFullName.value = currentUser.full_name || "";
-    editUniversity.value = currentUser.university || "";
-    editArrival.value = currentUser.arrival_date ? currentUser.arrival_date.slice(0, 10) : "";
+    /* ---------- Edit mode ---------- */
 
-    [nameDisplay, universityDisplay, arrivalDisplay].forEach((el) => { if (el) el.hidden = true; });
-    [editFullName, editUniversity, editArrival].forEach((el) => { el.hidden = false; });
+    const editProfileBtn = document.getElementById("editProfileBtn");
+    const cancelEditProfile = document.getElementById("cancelEditProfile");
+    const saveProfileBtn = document.getElementById("saveProfileBtn");
+    const profileEditActions = document.getElementById("profileEditActions");
 
-    profileEditActions.hidden = false;
-    editProfileBtn.hidden = true;
-}
-
-function exitEditMode() {
-    [nameDisplay, universityDisplay, arrivalDisplay].forEach((el) => { if (el) el.hidden = false; });
-    [editFullName, editUniversity, editArrival].forEach((el) => { el.hidden = true; });
-
-    profileEditActions.hidden = true;
-    editProfileBtn.hidden = false;
-}
-
-async function saveProfile() {
-    if (!currentUser) return;
-
-    const payload = {
-        full_name: editFullName.value.trim(),
-        university: editUniversity.value.trim(),
-        arrival_date: editArrival.value || null
+    const inputs = {
+        full_name: document.getElementById("editFullName"),
+        university: document.getElementById("editUniversity"),
+        phone: document.getElementById("editPhone"),
+        home_country: document.getElementById("editCountry"),
+        arrival_date: document.getElementById("editArrival")
     };
 
-    if (!payload.full_name) {
-        alert("Full name can't be empty.");
-        return;
-    }
+    // Each editable field sits next to the paragraph it replaces.
+    const displays = [
+        "[data-user-name]",
+        "[data-user-university]",
+        "[data-user-phone]",
+        "[data-user-country]",
+        "[data-user-arrival]"
+    ].map((selector) => document.querySelector(`#personalInfoSection ${selector}`));
 
-    saveProfileBtn.disabled = true;
-    saveProfileBtn.textContent = "Saving…";
-
-    try {
-        const response = await fetch(`http://127.0.0.1:5000/api/profile/${currentUser.user_id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+    function showInputs(editing) {
+        displays.forEach((element) => {
+            if (element) element.hidden = editing;
         });
 
-        const data = await response.json();
+        Object.values(inputs).forEach((input) => {
+            if (input) input.hidden = !editing;
+        });
 
-        if (!response.ok || !data.success) {
-            throw new Error(data.message || "Failed to save profile");
+        profileEditActions.hidden = !editing;
+        editProfileBtn.hidden = editing;
+    }
+
+    function enterEditMode() {
+        const current = SettleSmart.getUser();
+
+        inputs.full_name.value = current.full_name || "";
+        inputs.university.value = current.university || "";
+        inputs.phone.value = current.phone || "";
+        inputs.home_country.value = current.home_country || "";
+        inputs.arrival_date.value = current.arrival_date
+            ? String(current.arrival_date).slice(0, 10)
+            : "";
+
+        showInputs(true);
+    }
+
+    async function saveProfile() {
+        const payload = {
+            full_name: inputs.full_name.value.trim(),
+            university: inputs.university.value.trim(),
+            phone: inputs.phone.value.trim(),
+            home_country: inputs.home_country.value.trim(),
+            arrival_date: inputs.arrival_date.value || null
+        };
+
+        if (!payload.full_name) {
+            SettleSmart.toast("Full name can't be empty", "error");
+            return;
         }
 
-        localStorage.setItem("user", JSON.stringify(data.user));
-        window.location.reload();
-    } catch (error) {
-        console.error(error);
-        alert("Could not save your changes. Is the backend server running?");
-        saveProfileBtn.disabled = false;
-        saveProfileBtn.textContent = "Save changes";
-    }
-}
+        saveProfileBtn.disabled = true;
+        saveProfileBtn.textContent = "Saving…";
 
-if (editProfileBtn) {
-    editProfileBtn.addEventListener("click", enterEditMode);
-    cancelEditProfile.addEventListener("click", exitEditMode);
-    saveProfileBtn.addEventListener("click", saveProfile);
-}
+        try {
+            const data = await SettleSmart.api.put(
+                `/api/profile/${user.user_id}`, payload
+            );
+
+            SettleSmart.setUser(data.user);
+            SettleSmart.toast("Profile updated");
+            window.location.reload();
+        } catch (error) {
+            SettleSmart.toast(error.message, "error");
+            saveProfileBtn.disabled = false;
+            saveProfileBtn.textContent = "Save changes";
+        }
+    }
+
+    if (editProfileBtn) {
+        editProfileBtn.addEventListener("click", enterEditMode);
+        cancelEditProfile.addEventListener("click", () => showInputs(false));
+        saveProfileBtn.addEventListener("click", saveProfile);
+    }
+
+    loadStats();
+})();

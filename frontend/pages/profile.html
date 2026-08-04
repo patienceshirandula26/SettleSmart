@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/app.css">
 </head>
 
 <body>
@@ -91,17 +92,17 @@
 
         <section class="profile-stats">
             <article class="card profile-stat">
-                <strong>85%</strong>
-                <span>Profile Completion</span>
+                <strong id="statProgress">0%</strong>
+                <span>Settlement Progress</span>
             </article>
 
             <article class="card profile-stat">
-                <strong>10</strong>
-                <span>Documents Recorded</span>
+                <strong id="statDocs">0</strong>
+                <span>Documents Uploaded</span>
             </article>
 
             <article class="card profile-stat">
-                <strong>15/20</strong>
+                <strong id="statTasks">0/0</strong>
                 <span>Tasks Completed</span>
             </article>
         </section>
@@ -134,8 +135,26 @@
 
             <div class="profile-row">
                 <div>
+                    <span>Phone Number</span>
+                    <p data-user-phone>Not set</p>
+                    <input type="tel" class="profile-edit-input" id="editPhone"
+                           placeholder="+61 400 000 000" hidden>
+                </div>
+            </div>
+
+            <div class="profile-row">
+                <div>
+                    <span>Home Country</span>
+                    <p data-user-country>Not set</p>
+                    <input type="text" class="profile-edit-input" id="editCountry"
+                           placeholder="e.g. Kenya" hidden>
+                </div>
+            </div>
+
+            <div class="profile-row">
+                <div>
                     <span>Arrival Date</span>
-                    <p data-user-arrival>Not available</p>
+                    <p data-user-arrival>Not set</p>
                     <input type="date" class="profile-edit-input" id="editArrival" hidden>
                 </div>
             </div>
@@ -150,6 +169,7 @@
 
 </div>
 
+<script src="../js/api.js"></script>
 <script src="../js/user.js"></script>
 <script src="../js/profile.js"></script>
 

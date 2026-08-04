@@ -85,7 +85,7 @@
 
 .documents-list-header {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2.2fr 1fr 1fr .9fr 1.3fr;
     gap: 12px;
     padding: 12px 4px;
     margin-top: 10px;
@@ -99,7 +99,7 @@
 
 .document-row {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2.2fr 1fr 1fr .9fr 1.3fr;
     align-items: center;
     gap: 12px;
     padding: 14px 4px;
@@ -288,4 +288,139 @@
 
 .btn-save-profile:hover {
     background: var(--blue-dark);
+}
+
+/* =========================================================
+   Uploading, viewing and deleting files
+   ========================================================= */
+
+.doc-actions {
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.doc-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+
+    padding: 6px 11px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fff;
+
+    font-family: inherit;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.doc-action:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.doc-action.primary {
+    background: var(--blue, #2563eb);
+    border-color: var(--blue, #2563eb);
+    color: #fff;
+}
+
+.doc-action.primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.doc-action.danger:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
+/* File name shown under the document title once something is uploaded */
+
+.doc-file {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+
+    font-size: 12px;
+    color: #16a34a;
+}
+
+.doc-file-size { color: var(--muted); }
+
+/* Drop area inside the Add Document modal */
+
+.file-field {
+    display: block;
+    padding: 18px;
+    border: 1.5px dashed var(--border);
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+
+    font-size: 13px;
+    color: var(--muted);
+
+    transition: border-color .15s ease, background .15s ease;
+}
+
+.file-field:hover {
+    border-color: var(--blue, #2563eb);
+    background: #f8fafc;
+}
+
+.file-field input[type="file"] { display: none; }
+
+.file-field-name {
+    display: block;
+    margin-top: 6px;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+/* Category filter row above the list */
+
+.doc-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 4px 0 14px;
+}
+
+.doc-filter {
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fff;
+
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.doc-filter:hover { border-color: #cbd5e1; }
+
+.doc-filter.active {
+    background: var(--blue, #2563eb);
+    border-color: var(--blue, #2563eb);
+    color: #fff;
+}
+
+@media (max-width: 900px) {
+    .document-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .doc-actions { justify-content: flex-start; }
 }
