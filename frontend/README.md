@@ -1,186 +1,44 @@
 # Frontend
 
-This folder contains the React frontend for SettleSmart.
-<!DOCTYPE html>
-<html lang="en">
+Plain HTML, CSS and JavaScript — no framework and no build step.
 
-<head>
+The pages are served by the Flask backend, so start the server and open the
+address it prints:
 
-    <meta charset="UTF-8">
+```bash
+python3 ../backend/init_db.py   # first time only
+python3 ../backend/app.py
+```
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+## Structure
 
-    <title>Settings | SettleSmart</title>
+```text
+index.html        Landing page
+pages/            login, register, dashboard, checklist, documents,
+                  reminders, resources, profile, settings
+css/              One stylesheet per page, plus shared app.css
+js/               One script per page, plus shared api.js and user.js
+```
 
-    <link rel="stylesheet"
-          href="/static/css/style.css">
+## How the JavaScript fits together
 
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        rel="stylesheet">
+`api.js` loads first on every page. It works out where the backend is, wraps
+the API calls, and provides the shared helpers (date formatting, escaping,
+toast messages, and the logged-in user).
 
-</head>
+`user.js` loads next on the pages inside the app. It sends anyone who isn't
+logged in back to `login.html`, fills in every element marked with a
+`data-user-*` attribute, and wires up the logout links.
 
-<body>
+Each page then loads its own script, which fetches that page's data and renders
+it. Nothing on these pages is hardcoded — the numbers, task lists, documents and
+reminders all come from the database.
 
-<div class="sidebar">
+## Pointing at a different server
 
-    <h2>SettleSmart</h2>
+The pages normally talk to whichever server delivered them. To use a different
+backend, run this once in the browser console:
 
-    <ul>
-
-        <li><a href="/dashboard"><i class="fa fa-home"></i> Dashboard</a></li>
-
-        <li><a href="/checklist"><i class="fa fa-list-check"></i> Checklist</a></li>
-
-        <li><a href="/documents"><i class="fa fa-folder"></i> Documents</a></li>
-
-        <li><a href="/resources"><i class="fa fa-book"></i> Resources</a></li>
-
-        <li><a href="/reminders"><i class="fa fa-bell"></i> Reminders</a></li>
-
-        <li class="active"><a href="/settings"><i class="fa fa-gear"></i> Settings</a></li>
-
-        <li><a href="/logout"><i class="fa fa-right-from-bracket"></i> Logout</a></li>
-
-    </ul>
-
-</div>
-
-
-<div class="content">
-
-<h1>Account Settings</h1>
-
-<div class="settings-container">
-
-<form id="settingsForm">
-
-<div class="card">
-
-<h2>Profile Information</h2>
-
-<label>Full Name</label>
-
-<input
-type="text"
-id="fullname"
-placeholder="Enter Full Name">
-
-<label>Email Address</label>
-
-<input
-type="email"
-id="email"
-placeholder="Email Address">
-
-<label>Phone Number</label>
-
-<input
-type="text"
-id="phone"
-placeholder="Phone Number">
-
-<label>University</label>
-
-<input
-type="text"
-id="university"
-placeholder="University">
-
-</div>
-
-
-<div class="card">
-
-<h2>Password</h2>
-
-<label>Current Password</label>
-
-<input
-type="password"
-id="currentPassword">
-
-<label>New Password</label>
-
-<input
-type="password"
-id="newPassword">
-
-<label>Confirm Password</label>
-
-<input
-type="password"
-id="confirmPassword">
-
-</div>
-
-
-<div class="card">
-
-<h2>Notification Settings</h2>
-
-<label>
-
-<input type="checkbox"
-checked>
-
-Email Notifications
-
-</label>
-
-<label>
-
-<input type="checkbox"
-checked>
-
-Reminder Notifications
-
-</label>
-
-<label>
-
-<input type="checkbox">
-
-SMS Notifications
-
-</label>
-
-</div>
-
-
-<div class="card">
-
-<h2>Appearance</h2>
-
-<select id="theme">
-
-<option>Light</option>
-
-<option>Dark</option>
-
-</select>
-
-</div>
-
-
-<button
-type="submit"
-class="save-btn">
-
-Save Changes
-
-</button>
-
-</form>
-
-</div>
-
-</div>
-
-<script src="/static/js/settings.js"></script>
-
-</body>
-
-</html>
+```js
+localStorage.setItem("settlesmart-api", "http://192.168.0.5:5000");
+```

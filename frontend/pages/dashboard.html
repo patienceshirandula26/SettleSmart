@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/app.css">
 </head>
 
 <body>
@@ -150,7 +151,7 @@
         <!-- Welcome -->
         <section class="welcome">
             <h1 class="welcome-title" data-user-welcome>Welcome back 👋</h1>
-            <p class="welcome-subtitle">Continue your settlement journey in Australia.</p>
+            <p class="welcome-subtitle" data-user-subtitle>Continue your settlement journey in Australia.</p>
         </section>
 
         <!-- Overview: progress + stats -->
@@ -162,7 +163,7 @@
                 <div class="progress-card-header">
                     <div>
                         <h2 class="card-title">Settlement Progress</h2>
-                        <p class="card-subtitle">15 of 20 tasks completed</p>
+                        <p class="card-subtitle" id="progressSubtitle">Loading…</p>
                     </div>
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="m3 17 6-6 4 4 8-8" stroke-linecap="round" stroke-linejoin="round"/>
@@ -173,31 +174,31 @@
                 <div class="donut">
                     <svg viewBox="0 0 200 200">
                         <circle class="donut-track" cx="100" cy="100" r="82"/>
-                        <circle class="donut-fill" cx="100" cy="100" r="82"/>
+                        <circle class="donut-fill" id="donutFill" cx="100" cy="100" r="82"/>
                     </svg>
                     <div class="donut-label">
-                        <span class="donut-value">75%</span>
+                        <span class="donut-value" id="donutValue">0%</span>
                         <span class="donut-caption">Complete</span>
                     </div>
                 </div>
 
                 <div class="linear-progress">
                     <div class="linear-labels">
-                        <span class="done">15 completed</span>
-                        <span class="left">5 remaining</span>
+                        <span class="done" id="progressDone">0 completed</span>
+                        <span class="left" id="progressLeft">0 remaining</span>
                     </div>
                     <div class="progress-track">
-                        <div class="progress-fill" style="width: 75%;"></div>
+                        <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
                     </div>
                 </div>
 
-                <p class="notice">
+                <p class="notice" id="attentionNotice" hidden>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="9"/>
                         <path d="M12 8v5" stroke-linecap="round"/>
                         <circle cx="12" cy="16.5" r="1.2" fill="currentColor" stroke="none"/>
                     </svg>
-                    <span><strong>2 tasks</strong> need attention before your semester starts.</span>
+                    <span id="attentionText"></span>
                 </p>
 
             </div>
@@ -213,7 +214,7 @@
                         </svg>
                     </span>
                     <div>
-                        <p class="stat-value">15</p>
+                        <p class="stat-value" id="statCompleted">0</p>
                         <p class="stat-label">Completed Tasks</p>
                     </div>
                 </div>
@@ -226,7 +227,7 @@
                         </svg>
                     </span>
                     <div>
-                        <p class="stat-value">5</p>
+                        <p class="stat-value" id="statPendingTasks">0</p>
                         <p class="stat-label">Pending Tasks</p>
                     </div>
                 </div>
@@ -239,7 +240,7 @@
                         </svg>
                     </span>
                     <div>
-                        <p class="stat-value">3</p>
+                        <p class="stat-value" id="statReminders">0</p>
                         <p class="stat-label">Upcoming Reminders</p>
                     </div>
                 </div>
@@ -252,7 +253,7 @@
                         </svg>
                     </span>
                     <div>
-                        <p class="stat-value">10</p>
+                        <p class="stat-value" id="statDocuments">0</p>
                         <p class="stat-label">Documents Uploaded</p>
                     </div>
                 </div>
@@ -311,128 +312,7 @@
                 </a>
             </div>
 
-            <div class="category-grid">
-
-                <div class="card category-card">
-                    <div class="category-top">
-                        <span class="category-emoji">🎓</span>
-                        <span class="count-badge">2/3</span>
-                    </div>
-                    <h3 class="category-name">Study</h3>
-                    <p class="category-desc">Student ID, Email &amp; USI registration</p>
-                    <p class="category-percent">67% done</p>
-                    <div class="progress-track">
-                        <div class="progress-fill" style="width: 67%;"></div>
-                    </div>
-                    <a href="checklist.html" class="link-more">
-                        View Details
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </a>
-                </div>
-
-                <div class="card category-card">
-                    <div class="category-top">
-                        <span class="category-emoji">💼</span>
-                        <span class="count-badge">1/4</span>
-                    </div>
-                    <h3 class="category-name">Employment</h3>
-                    <p class="category-desc">TFN, Resume, LinkedIn &amp; Superannuation</p>
-                    <p class="category-percent">25% done</p>
-                    <div class="progress-track">
-                        <div class="progress-fill" style="width: 25%;"></div>
-                    </div>
-                    <a href="checklist.html" class="link-more">
-                        View Details
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </a>
-                </div>
-
-                <div class="card category-card">
-                    <div class="category-top">
-                        <span class="category-emoji">🚆</span>
-                        <span class="count-badge">1/2</span>
-                    </div>
-                    <h3 class="category-name">Transport</h3>
-                    <p class="category-desc">Go Card &amp; Driver Licence Verification</p>
-                    <p class="category-percent">50% done</p>
-                    <div class="progress-track">
-                        <div class="progress-fill" style="width: 50%;"></div>
-                    </div>
-                    <a href="checklist.html" class="link-more">
-                        View Details
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </a>
-                </div>
-
-                <div class="card category-card">
-                    <div class="category-top">
-                        <span class="category-emoji">🏥</span>
-                        <span class="count-badge is-complete">2/2</span>
-                    </div>
-                    <h3 class="category-name">Health</h3>
-                    <p class="category-desc">OSHC coverage &amp; Emergency Contacts</p>
-                    <p class="category-percent">100% done</p>
-                    <div class="progress-track">
-                        <div class="progress-fill is-complete" style="width: 100%;"></div>
-                    </div>
-                    <a href="checklist.html" class="link-more is-complete">
-                        View Details
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </a>
-                </div>
-
-                <div class="card category-card">
-                    <div class="category-top">
-                        <span class="category-emoji">🏠</span>
-                        <span class="count-badge">1/3</span>
-                    </div>
-                    <h3 class="category-name">Accommodation</h3>
-                    <p class="category-desc">Rental Documents, Bond &amp; Internet</p>
-                    <p class="category-percent">33% done</p>
-                    <div class="progress-track">
-                        <div class="progress-fill" style="width: 33%;"></div>
-                    </div>
-                    <a href="checklist.html" class="link-more">
-                        View Details
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </a>
-                </div>
-
-                <div class="card category-card">
-                    <div class="category-top">
-                        <span class="category-emoji">🪪</span>
-                        <span class="count-badge">0/2</span>
-                    </div>
-                    <h3 class="category-name">Work Clearances</h3>
-                    <p class="category-desc">Blue, Yellow &amp; Red Card applications</p>
-                    <p class="category-percent">0% done</p>
-                    <div class="progress-track">
-                        <div class="progress-fill" style="width: 0%;"></div>
-                    </div>
-                    <a href="checklist.html" class="link-more">
-                        View Details
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </a>
-                </div>
-
-                <div class="card category-card">
-                    <div class="category-top">
-                        <span class="category-emoji">📱</span>
-                        <span class="count-badge">1/2</span>
-                    </div>
-                    <h3 class="category-name">Communication</h3>
-                    <p class="category-desc">Australian SIM Card &amp; Mobile Number</p>
-                    <p class="category-percent">50% done</p>
-                    <div class="progress-track">
-                        <div class="progress-fill" style="width: 50%;"></div>
-                    </div>
-                    <a href="checklist.html" class="link-more">
-                        View Details
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </a>
-                </div>
-
-            </div>
+            <div class="category-grid" id="categoryGrid"></div>
 
         </section>
 
@@ -458,91 +338,7 @@
                             <th scope="col">DUE DATE</th>
                         </tr>
                     </thead>
-                    <tbody>
-
-                        <tr class="is-urgent">
-                            <td>
-                                <div class="task-cell">
-                                    <button class="task-check" type="button" aria-label="Mark Apply for TFN complete"></button>
-                                    <div>
-                                        <p class="task-name">Apply for TFN</p>
-                                        <p class="task-warning"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1.2" fill="currentColor" stroke="none"/></svg> Due soon — action required</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="pill employment">Employment</span></td>
-                            <td><span class="pill high">High</span></td>
-                            <td>
-                                <span class="due-cell"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke-linecap="round"/></svg> 5 Jul 2025</span>
-                            </td>
-                        </tr>
-
-                        <tr class="is-urgent">
-                            <td>
-                                <div class="task-cell">
-                                    <button class="task-check" type="button" aria-label="Mark Create USI complete"></button>
-                                    <div>
-                                        <p class="task-name">Create USI</p>
-                                        <p class="task-warning"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1.2" fill="currentColor" stroke="none"/></svg> Due soon — action required</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="pill study">Study</span></td>
-                            <td><span class="pill high">High</span></td>
-                            <td>
-                                <span class="due-cell"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke-linecap="round"/></svg> 8 Jul 2025</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="task-cell">
-                                    <button class="task-check" type="button" aria-label="Mark Activate SIM Card complete"></button>
-                                    <div>
-                                        <p class="task-name">Activate SIM Card</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="pill communication">Communication</span></td>
-                            <td><span class="pill medium">Medium</span></td>
-                            <td>
-                                <span class="due-cell"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke-linecap="round"/></svg> 10 Jul 2025</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="task-cell">
-                                    <button class="task-check" type="button" aria-label="Mark Register Go Card complete"></button>
-                                    <div>
-                                        <p class="task-name">Register Go Card</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="pill transport">Transport</span></td>
-                            <td><span class="pill medium">Medium</span></td>
-                            <td>
-                                <span class="due-cell"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke-linecap="round"/></svg> 12 Jul 2025</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="task-cell">
-                                    <button class="task-check" type="button" aria-label="Mark Upload Rental Agreement complete"></button>
-                                    <div>
-                                        <p class="task-name">Upload Rental Agreement</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td><span class="pill accommodation">Accommodation</span></td>
-                            <td><span class="pill low">Low</span></td>
-                            <td>
-                                <span class="due-cell"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke-linecap="round"/></svg> 15 Jul 2025</span>
-                            </td>
-                        </tr>
-
-                    </tbody>
+                    <tbody id="pendingTasksBody"></tbody>
                 </table>
 
             </div>
@@ -552,49 +348,7 @@
                 <!-- Recent activity -->
                 <div class="card">
                     <h2 class="section-title">Recent Activity</h2>
-                    <div class="activity-list">
-
-                        <div class="activity-item">
-                            <span class="activity-icon green"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 12.5 4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                            <div>
-                                <p class="activity-title">Go Card registered</p>
-                                <p class="activity-time">2 hours ago</p>
-                            </div>
-                        </div>
-
-                        <div class="activity-item">
-                            <span class="activity-icon green"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 12.5 4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                            <div>
-                                <p class="activity-title">Student ID uploaded</p>
-                                <p class="activity-time">Yesterday, 3:40 PM</p>
-                            </div>
-                        </div>
-
-                        <div class="activity-item">
-                            <span class="activity-icon amber"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" stroke-linecap="round"/></svg></span>
-                            <div>
-                                <p class="activity-title">Reminder created for TFN</p>
-                                <p class="activity-time">Yesterday, 11:00 AM</p>
-                            </div>
-                        </div>
-
-                        <div class="activity-item">
-                            <span class="activity-icon green"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 12.5 4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                            <div>
-                                <p class="activity-title">Bank account added</p>
-                                <p class="activity-time">2 days ago</p>
-                            </div>
-                        </div>
-
-                        <div class="activity-item">
-                            <span class="activity-icon green"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 12.5 4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                            <div>
-                                <p class="activity-title">OSHC documents saved</p>
-                                <p class="activity-time">3 days ago</p>
-                            </div>
-                        </div>
-
-                    </div>
+                    <div class="activity-list" id="activityList"></div>
                 </div>
 
                 <!-- Tip -->
@@ -615,27 +369,7 @@
                 <!-- Upcoming reminders -->
                 <div class="card">
                     <h2 class="section-title">Upcoming Reminders</h2>
-                    <div class="reminder-list">
-
-                        <div class="reminder-item">
-                            <span class="reminder-dot red"></span>
-                            <span class="reminder-name">TFN Application</span>
-                            <span class="reminder-date">5 Jul 2025</span>
-                        </div>
-
-                        <div class="reminder-item">
-                            <span class="reminder-dot red"></span>
-                            <span class="reminder-name">USI Registration</span>
-                            <span class="reminder-date">8 Jul 2025</span>
-                        </div>
-
-                        <div class="reminder-item">
-                            <span class="reminder-dot amber"></span>
-                            <span class="reminder-name">SIM Card Activation</span>
-                            <span class="reminder-date">10 Jul 2025</span>
-                        </div>
-
-                    </div>
+                    <div class="reminder-list" id="upcomingReminders"></div>
                 </div>
 
             </div>
@@ -650,36 +384,7 @@
                 <a href="resources.html" class="link-more">View All <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
             </div>
 
-            <div class="resource-grid">
-
-                <a class="card resource-card" href="https://www.ato.gov.au" target="_blank" rel="noopener">
-                    <span class="resource-emoji">🏛️</span>
-                    <span class="resource-text">
-                        <span class="resource-name">Australian Taxation Office</span>
-                        <span class="resource-desc">Apply for your Tax File Number</span>
-                    </span>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 3h6v6M10 14 21 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-
-                <a class="card resource-card" href="https://www.usi.gov.au" target="_blank" rel="noopener">
-                    <span class="resource-emoji">🎓</span>
-                    <span class="resource-text">
-                        <span class="resource-name">USI Registry</span>
-                        <span class="resource-desc">Create your Unique Student Identifier</span>
-                    </span>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 3h6v6M10 14 21 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-
-                <a class="card resource-card" href="https://www.qld.gov.au/transport" target="_blank" rel="noopener">
-                    <span class="resource-emoji">🚗</span>
-                    <span class="resource-text">
-                        <span class="resource-name">Queensland Transport</span>
-                        <span class="resource-desc">Driver licence &amp; vehicle services</span>
-                    </span>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 3h6v6M10 14 21 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-
-            </div>
+            <div class="resource-grid" id="resourceGrid"></div>
 
         </section>
 
@@ -687,8 +392,9 @@
 
 </div>
 
-<script src="../js/script.js"></script>
+<script src="../js/api.js"></script>
 <script src="../js/user.js"></script>
+<script src="../js/dashboard.js"></script>
 
 </body>
 </html>

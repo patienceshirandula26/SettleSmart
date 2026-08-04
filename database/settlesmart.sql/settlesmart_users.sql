@@ -1,58 +1,37 @@
--- MySQL dump 10.13  Distrib 8.0.46, for macos15 (arm64)
---
--- Host: localhost    Database: settlesmart
--- ------------------------------------------------------
--- Server version	9.7.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
-SET @@SESSION.SQL_LOG_BIN= 0;
-
---
--- GTID state at the beginning of the backup 
---
-
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '060ccaa2-7928-11f1-b09f-fa425c060818:1-17';
-
---
--- Table structure for table `users`
---
-
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `full_name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password_hash` varchar(255) NOT NULL,
   `university` varchar(100) DEFAULT NULL,
   `arrival_date` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `phone` varchar(30) DEFAULT NULL,
+  `home_country` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Fabian Uchendu','fabian@gmail.com','123456','James Cook University','2020-09-10','2026-07-06 11:14:51');
+INSERT INTO `users` VALUES (1,'Fabian Uchendu','fabian@gmail.com','scrypt:32768:8:1$ZWlPmg61a6Eq33Jk$444590d7c57bca69335e5fcd86085b646988a3b077ba096a2b31ac7a9c6d2ce5edd5f6746f33ac4f1b0e456d6f5267f3083ca1216b621330aae169f427c5bbb2','James Cook University','2020-09-10','2026-07-06 11:14:51',NULL,NULL),(2,'Patience Njeri','njerishirandula@gmail.com','scrypt:32768:8:1$mo8XLsJPmR2tLaoD$5f5991b5c47117fa4cafe9af0779d37d8e3aa4a58bded33edaf3293b2ac1bafc4e72021d42d0bb589c719553cf1e7549398a0af9637cf1ff5ca17075f66df340','JCU',NULL,'2026-08-02 09:32:53',NULL,NULL),(3,'Matthew Berndt','matthew@gmail.com','scrypt:32768:8:1$cZW18vm1yEfR6lSu$9b02dc32ce81795b8de0e1648407ae8d3e2bc8cde68291f2efb0ee50cc741c23538d706c10a73c9457ab6775da3938023b67432214e67a73b61bd5e968cd584c','QUT',NULL,'2026-08-02 11:27:19',NULL,NULL),(4,'Patience Njeri','patiencenjeri.shirandula@my.jcu.edu.au','scrypt:32768:8:1$EQCq4tPWyUGZbHPV$e2a1e69f9a60f5b7614881ef6117d6c5a62b5487435f8e19bd0f45c392e794fa5a573fdc1e607e33663f834002aa2b7e5d3d104a984bf9cc532673b4a22b7a43','QUT',NULL,'2026-08-04 04:00:37',NULL,NULL),(5,'Sonam Wangmo','sonamwangmo@gmail.com','scrypt:32768:8:1$uG9amR9Wus01NGD2$a7940f377ae1e8fedbbb5b6dbbbd7d63eae29b71b1ca5851164f245efa75d7c3ac080fba6739a46c45f2c17fd6a033b85225df5b65f0165f5274b9403ba60258','JCU',NULL,'2026-08-04 05:42:18',NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
-SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -63,4 +42,3 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-06 23:18:43

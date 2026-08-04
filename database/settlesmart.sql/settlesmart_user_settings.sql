@@ -9,23 +9,24 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-DROP TABLE IF EXISTS `categories`;
+DROP TABLE IF EXISTS `user_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `categories` (
-  `category_id` int NOT NULL AUTO_INCREMENT,
-  `category_name` varchar(100) NOT NULL,
-  `description` text,
-  `emoji` varchar(10) DEFAULT NULL,
-  `sort_order` int NOT NULL DEFAULT '0',
-  PRIMARY KEY (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `user_settings` (
+  `user_id` int NOT NULL,
+  `email_notifications` tinyint(1) NOT NULL DEFAULT '1',
+  `sms_reminders` tinyint(1) NOT NULL DEFAULT '1',
+  `push_notifications` tinyint(1) NOT NULL DEFAULT '0',
+  `language` varchar(50) NOT NULL DEFAULT 'English (Australia)',
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `fk_settings_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
-LOCK TABLES `categories` WRITE;
-/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'Identity & Study','Student ID, USI, passport and visa documents','?',1),(2,'Financial','TFN, bank account, bank card and money setup','?',2),(3,'Transport & Licensing','Go Card and international driver licence verification','?',3),(4,'Health','OSHC details and emergency contacts','?',4),(5,'Accommodation','Rental documents, bond and housing setup','?',5),(6,'Work Clearances','Blue Card, Yellow Card and Red Card if required','?',6),(7,'Communication','Australian SIM card and mobile number setup','?',7),(8,'Employment','Resume, LinkedIn and job-ready documents','?',8);
-/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+LOCK TABLES `user_settings` WRITE;
+/*!40000 ALTER TABLE `user_settings` DISABLE KEYS */;
+INSERT INTO `user_settings` VALUES (1,1,1,0,'English (Australia)'),(2,1,1,0,'English (Australia)'),(3,1,1,0,'English (Australia)'),(4,1,1,0,'English (Australia)'),(5,1,1,0,'English (Australia)');
+/*!40000 ALTER TABLE `user_settings` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

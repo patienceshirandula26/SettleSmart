@@ -502,3 +502,83 @@ p{
     font-size: 14px;
     color: #64748b;
 }
+
+/* =========================================================
+   Password strength meter on the registration form
+   ========================================================= */
+
+.strength {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 9px;
+}
+
+.strength-track {
+    flex: 1;
+    height: 6px;
+    border-radius: 999px;
+    background: #e6ecf5;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    transition: width .25s ease, background .25s ease;
+}
+
+.strength-fill.weak   { background: #dc2626; }
+.strength-fill.fair   { background: #f59e0b; }
+.strength-fill.good   { background: #3b82f6; }
+.strength-fill.strong { background: #16a34a; }
+
+.strength-label {
+    flex: 0 0 auto;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.strength-label.weak   { color: #dc2626; }
+.strength-label.fair   { color: #b45309; }
+.strength-label.good   { color: #2563eb; }
+.strength-label.strong { color: #16a34a; }
+
+.password-rules {
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+
+    display: grid;
+    gap: 4px;
+}
+
+.password-rules li {
+    position: relative;
+    padding-left: 22px;
+
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #64748b;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+/* An empty circle that fills with a tick once the rule is satisfied. */
+.password-rules li::before {
+    content: "○";
+    position: absolute;
+    left: 4px;
+    color: #cbd5e1;
+}
+
+.password-rules li.met {
+    color: #16a34a;
+}
+
+.password-rules li.met::before {
+    content: "✓";
+    color: #16a34a;
+    font-weight: 700;
+}

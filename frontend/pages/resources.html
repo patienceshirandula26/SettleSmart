@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/resources.css">
+    <link rel="stylesheet" href="../css/app.css">
 </head>
 
 <body>
@@ -91,63 +92,7 @@
                 <h2 class="section-title">Official Resources</h2>
             </div>
 
-            <div class="resource-grid">
-
-                <a class="card resource-card" href="https://www.ato.gov.au" target="_blank" rel="noopener">
-                    <span class="resource-emoji">🏛️</span>
-                    <span class="resource-text">
-                        <span class="resource-name">Australian Taxation Office</span>
-                        <span class="resource-desc">Apply for your Tax File Number</span>
-                    </span>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 3h6v6M10 14 21 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-
-                <a class="card resource-card" href="https://www.usi.gov.au" target="_blank" rel="noopener">
-                    <span class="resource-emoji">🎓</span>
-                    <span class="resource-text">
-                        <span class="resource-name">USI Registry</span>
-                        <span class="resource-desc">Create your Unique Student Identifier</span>
-                    </span>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 3h6v6M10 14 21 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-
-                <a class="card resource-card" href="https://www.qld.gov.au/transport" target="_blank" rel="noopener">
-                    <span class="resource-emoji">🚗</span>
-                    <span class="resource-text">
-                        <span class="resource-name">Queensland Transport</span>
-                        <span class="resource-desc">Driver licence &amp; vehicle services</span>
-                    </span>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 3h6v6M10 14 21 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-
-                <a class="card resource-card" href="https://www.servicesaustralia.gov.au/medicare" target="_blank" rel="noopener">
-                    <span class="resource-emoji">🏥</span>
-                    <span class="resource-text">
-                        <span class="resource-name">Medicare / Services Australia</span>
-                        <span class="resource-desc">Health services &amp; payments</span>
-                    </span>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 3h6v6M10 14 21 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-
-                <a class="card resource-card" href="https://studyqueensland.qld.gov.au" target="_blank" rel="noopener">
-                    <span class="resource-emoji">🎓</span>
-                    <span class="resource-text">
-                        <span class="resource-name">Study Queensland</span>
-                        <span class="resource-desc">Student support &amp; events</span>
-                    </span>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 3h6v6M10 14 21 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-
-                <a class="card resource-card" href="https://www.homeaffairs.gov.au" target="_blank" rel="noopener">
-                    <span class="resource-emoji">🛂</span>
-                    <span class="resource-text">
-                        <span class="resource-name">Department of Home Affairs</span>
-                        <span class="resource-desc">Visa conditions &amp; updates</span>
-                    </span>
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 3h6v6M10 14 21 3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </a>
-
-            </div>
+            <div class="resource-grid" id="resourceGrid"></div>
 
         </section>
 
@@ -156,59 +101,7 @@
             <div class="card steps-card">
                 <h2 class="card-title">Getting Started Steps</h2>
 
-                <div class="steps-list">
-
-                    <div class="step-item">
-                        <span class="step-icon done">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 12.5 4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </span>
-                        <div>
-                            <p class="step-title">Create your USI</p>
-                            <p class="step-desc">Before enrolment</p>
-                        </div>
-                    </div>
-
-                    <div class="step-item">
-                        <span class="step-icon done">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 12.5 4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </span>
-                        <div>
-                            <p class="step-title">Apply for your TFN</p>
-                            <p class="step-desc">For work &amp; banking</p>
-                        </div>
-                    </div>
-
-                    <div class="step-item">
-                        <span class="step-icon pending">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" stroke-linecap="round"/></svg>
-                        </span>
-                        <div>
-                            <p class="step-title">Open a bank account</p>
-                            <p class="step-desc">Bring your passport &amp; CoE</p>
-                        </div>
-                    </div>
-
-                    <div class="step-item">
-                        <span class="step-icon done">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 12.5 4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </span>
-                        <div>
-                            <p class="step-title">Get your Go Card</p>
-                            <p class="step-desc">Public transport in QLD</p>
-                        </div>
-                    </div>
-
-                    <div class="step-item">
-                        <span class="step-icon done">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 12.5 4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                        </span>
-                        <div>
-                            <p class="step-title">Register with Medicare / OSHC</p>
-                            <p class="step-desc">Health cover essentials</p>
-                        </div>
-                    </div>
-
-                </div>
+                <div class="steps-list" id="stepsList"></div>
             </div>
 
             <div class="tip-card">
@@ -231,7 +124,9 @@
 
 </div>
 
+<script src="../js/api.js"></script>
 <script src="../js/user.js"></script>
+<script src="../js/resources.js"></script>
 
 </body>
 </html>

@@ -99,3 +99,82 @@
 .toggle-switch input:checked + .toggle-slider::before {
     transform: translateX(18px);
 }
+
+/* =========================================================
+   Live settings — language picker and password form
+   ========================================================= */
+
+.settings-select {
+    margin-top: 4px;
+    padding: 8px 12px;
+    min-width: 220px;
+
+    border: 1px solid var(--border, #e6ecf5);
+    border-radius: 8px;
+    background: #fff;
+
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink, #0f172a);
+    cursor: pointer;
+}
+
+.settings-select:focus {
+    outline: none;
+    border-color: var(--blue, #2563eb);
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 380px;
+    margin-top: 6px;
+}
+
+.settings-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.settings-field label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted, #64748b);
+}
+
+.settings-field input {
+    padding: 10px 12px;
+    border: 1px solid var(--border, #e6ecf5);
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink, #0f172a);
+}
+
+.settings-field input:focus {
+    outline: none;
+    border-color: var(--blue, #2563eb);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.btn-save-settings {
+    align-self: flex-start;
+    padding: 10px 20px;
+
+    border: 0;
+    border-radius: 9px;
+    background: var(--blue, #2563eb);
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+
+    transition: background .15s ease;
+}
+
+.btn-save-settings:hover { background: #1d4ed8; }

@@ -1,35 +1,17 @@
--- MySQL dump 10.13  Distrib 8.0.46, for macos15 (arm64)
---
--- Host: localhost    Database: settlesmart
--- ------------------------------------------------------
--- Server version	9.7.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
-SET @@SESSION.SQL_LOG_BIN= 0;
-
---
--- GTID state at the beginning of the backup 
---
-
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '060ccaa2-7928-11f1-b09f-fa425c060818:1-17';
-
---
--- Table structure for table `documents`
---
-
 DROP TABLE IF EXISTS `documents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `documents` (
   `document_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
@@ -39,22 +21,24 @@ CREATE TABLE `documents` (
   `reference_number` varchar(100) DEFAULT NULL,
   `provider` varchar(100) DEFAULT NULL,
   `notes` text,
+  `file_name` varchar(255) DEFAULT NULL,
+  `stored_name` varchar(255) DEFAULT NULL,
+  `file_size` int DEFAULT NULL,
+  `mime_type` varchar(120) DEFAULT NULL,
+  `expiry_date` date DEFAULT NULL,
+  `uploaded_at` datetime DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`document_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `documents_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_documents_user` (`user_id`),
+  CONSTRAINT `fk_documents_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `documents`
---
 
 LOCK TABLES `documents` WRITE;
 /*!40000 ALTER TABLE `documents` DISABLE KEYS */;
-INSERT INTO `documents` VALUES (1,1,'USI Number','Study','Completed','USI123456789','USI Registry','Required for study and training records'),(2,1,'Tax File Number','Financial','Completed','TFN123456','Australian Taxation Office','Required for employment and tax purposes'),(3,1,'Go Card','Transport','Completed','GO123456','Translink','Used for public transport in Queensland'),(4,1,'Bank Card','Financial','Completed','**** 1234','Commonwealth Bank','Debit card received'),(5,1,'OSHC Details','Health','Completed','OSHC123456','Bupa','Health cover details stored'),(6,1,'Australian SIM Card','Communication','Completed','0400 000 000','Telstra','Australian mobile number activated'),(7,1,'Blue Card','Work Clearance','Pending',NULL,'Queensland Government','Only required for child-related work'),(8,1,'Yellow Card','Work Clearance','Pending',NULL,'NDIS Worker Screening','Only required for disability support work'),(9,1,'Red Card','Work Clearance','Not Required',NULL,'Queensland Government','Only required for some work pathways'),(10,1,'International Driver Licence Verification','Transport','Pending',NULL,'Queensland Transport','Verify overseas licence if planning to drive');
+INSERT INTO `documents` VALUES (1,1,'USI Number','Identity & Study','Completed','USI123456789','USI Registry','Required for study and training records',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(2,1,'Tax File Number','Financial','Completed','TFN123456','Australian Taxation Office','Required for employment and tax purposes',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(3,1,'Go Card','Transport & Licensing','Completed','GO123456','Translink','Used for public transport in Queensland',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(4,1,'Bank Card','Financial','Completed','**** 1234','Commonwealth Bank','Debit card received',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(5,1,'OSHC Details','Health','Completed','OSHC123456','Bupa','Health cover details stored',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(6,1,'Australian SIM Card','Communication','Completed','0400 000 000','Telstra','Australian mobile number activated',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(7,1,'Blue Card','Work Clearances','Pending',NULL,'Queensland Government','Only required for child-related work',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(8,1,'Yellow Card','Work Clearances','Pending',NULL,'NDIS Worker Screening','Only required for disability support work',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(9,1,'Red Card','Work Clearances','Not Required',NULL,'Queensland Government','Only required for some work pathways',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(10,1,'International Driver Licence Verification','Transport & Licensing','Pending',NULL,'Queensland Transport','Verify overseas licence if planning to drive',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(11,5,'drivers license','Transport & Licensing','Completed',NULL,NULL,'gvhiujhb',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(12,2,'Passport & Visa Copy','Identity & Study','Pending',NULL,'Department of Home Affairs','Keep a scanned copy of your passport photo page and visa grant',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(13,2,'USI Number','Identity & Study','Pending',NULL,'USI Registry','Required for study and training records',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(14,2,'Student ID Card','Identity & Study','Pending',NULL,'Your university','Collect from campus student services',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(15,2,'Tax File Number','Financial','Pending',NULL,'Australian Taxation Office','Required for employment and tax purposes',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(16,2,'Bank Card','Financial','Pending',NULL,'Your bank','Upload a photo once your debit card arrives',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(17,2,'Go Card','Transport & Licensing','Pending',NULL,'Translink','Used for public transport in Queensland',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(18,2,'International Driver Licence Verification','Transport & Licensing','Pending',NULL,'Queensland Transport','Verify your overseas licence if you plan to drive',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(19,2,'OSHC Details','Health','Pending',NULL,'Your health cover provider','Upload your health cover certificate',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(20,2,'Rental Agreement','Accommodation','Pending',NULL,'Your landlord or agent','Store your signed lease and bond receipt',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(21,2,'Australian SIM Card','Communication','Pending',NULL,'Your mobile provider','Record your new Australian mobile number',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(22,2,'Blue Card','Work Clearances','Pending',NULL,'Queensland Government','Only required for child-related work',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(23,2,'Yellow Card','Work Clearances','Pending',NULL,'NDIS Worker Screening','Only required for disability support work',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(24,3,'Passport & Visa Copy','Identity & Study','Pending',NULL,'Department of Home Affairs','Keep a scanned copy of your passport photo page and visa grant',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(25,3,'USI Number','Identity & Study','Pending',NULL,'USI Registry','Required for study and training records',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(26,3,'Student ID Card','Identity & Study','Pending',NULL,'Your university','Collect from campus student services',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(27,3,'Tax File Number','Financial','Pending',NULL,'Australian Taxation Office','Required for employment and tax purposes',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(28,3,'Bank Card','Financial','Pending',NULL,'Your bank','Upload a photo once your debit card arrives',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(29,3,'Go Card','Transport & Licensing','Pending',NULL,'Translink','Used for public transport in Queensland',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(30,3,'International Driver Licence Verification','Transport & Licensing','Pending',NULL,'Queensland Transport','Verify your overseas licence if you plan to drive',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(31,3,'OSHC Details','Health','Pending',NULL,'Your health cover provider','Upload your health cover certificate',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(32,3,'Rental Agreement','Accommodation','Pending',NULL,'Your landlord or agent','Store your signed lease and bond receipt',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(33,3,'Australian SIM Card','Communication','Pending',NULL,'Your mobile provider','Record your new Australian mobile number',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(34,3,'Blue Card','Work Clearances','Pending',NULL,'Queensland Government','Only required for child-related work',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(35,3,'Yellow Card','Work Clearances','Pending',NULL,'NDIS Worker Screening','Only required for disability support work',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(36,4,'Passport & Visa Copy','Identity & Study','Pending',NULL,'Department of Home Affairs','Keep a scanned copy of your passport photo page and visa grant',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(37,4,'USI Number','Identity & Study','Pending',NULL,'USI Registry','Required for study and training records',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(38,4,'Student ID Card','Identity & Study','Pending',NULL,'Your university','Collect from campus student services',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(39,4,'Tax File Number','Financial','Pending',NULL,'Australian Taxation Office','Required for employment and tax purposes',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(40,4,'Bank Card','Financial','Pending',NULL,'Your bank','Upload a photo once your debit card arrives',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(41,4,'Go Card','Transport & Licensing','Pending',NULL,'Translink','Used for public transport in Queensland',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(42,4,'International Driver Licence Verification','Transport & Licensing','Pending',NULL,'Queensland Transport','Verify your overseas licence if you plan to drive',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(43,4,'OSHC Details','Health','Pending',NULL,'Your health cover provider','Upload your health cover certificate',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(44,4,'Rental Agreement','Accommodation','Pending',NULL,'Your landlord or agent','Store your signed lease and bond receipt',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(45,4,'Australian SIM Card','Communication','Pending',NULL,'Your mobile provider','Record your new Australian mobile number',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(46,4,'Blue Card','Work Clearances','Pending',NULL,'Queensland Government','Only required for child-related work',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12'),(47,4,'Yellow Card','Work Clearances','Pending',NULL,'NDIS Worker Screening','Only required for disability support work',NULL,NULL,NULL,NULL,NULL,NULL,'2026-08-04 06:03:12');
 /*!40000 ALTER TABLE `documents` ENABLE KEYS */;
 UNLOCK TABLES;
-SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -65,4 +49,3 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-06 23:18:43

@@ -1,35 +1,17 @@
--- MySQL dump 10.13  Distrib 8.0.46, for macos15 (arm64)
---
--- Host: localhost    Database: settlesmart
--- ------------------------------------------------------
--- Server version	9.7.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
-SET @@SESSION.SQL_LOG_BIN= 0;
-
---
--- GTID state at the beginning of the backup 
---
-
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '060ccaa2-7928-11f1-b09f-fa425c060818:1-17';
-
---
--- Table structure for table `user_tasks`
---
-
 DROP TABLE IF EXISTS `user_tasks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_tasks` (
   `user_task_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
@@ -37,24 +19,21 @@ CREATE TABLE `user_tasks` (
   `status` enum('Not Started','In Progress','Completed') DEFAULT 'Not Started',
   `completed_date` date DEFAULT NULL,
   `notes` text,
+  `due_date` date DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_task_id`),
-  KEY `user_id` (`user_id`),
-  KEY `task_id` (`task_id`),
-  CONSTRAINT `user_tasks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  CONSTRAINT `user_tasks_ibfk_2` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`task_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `uq_user_task` (`user_id`,`task_id`),
+  KEY `fk_user_tasks_task` (`task_id`),
+  CONSTRAINT `fk_user_tasks_task` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`task_id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_user_tasks_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=340 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `user_tasks`
---
 
 LOCK TABLES `user_tasks` WRITE;
 /*!40000 ALTER TABLE `user_tasks` DISABLE KEYS */;
-INSERT INTO `user_tasks` VALUES (1,1,1,'Completed',NULL,NULL),(2,1,2,'Completed',NULL,NULL),(3,1,3,'Completed',NULL,NULL),(4,1,4,'Completed',NULL,NULL),(5,1,5,'Completed',NULL,NULL),(6,1,6,'Completed',NULL,NULL),(7,1,7,'Not Started',NULL,NULL),(8,1,8,'Completed',NULL,NULL),(9,1,9,'Completed',NULL,NULL),(10,1,10,'Not Started',NULL,NULL),(11,1,11,'Not Started',NULL,NULL),(12,1,12,'Not Started',NULL,NULL),(13,1,13,'Completed',NULL,NULL),(14,1,14,'Completed',NULL,NULL);
+INSERT INTO `user_tasks` VALUES (1,1,1,'Completed',NULL,NULL,NULL,'2026-08-04 06:03:12'),(2,1,2,'Completed',NULL,NULL,NULL,'2026-08-04 06:03:12'),(3,1,3,'Completed',NULL,'Applied online today',NULL,'2026-08-04 06:03:12'),(4,1,4,'Completed',NULL,NULL,NULL,'2026-08-04 06:03:12'),(5,1,5,'Completed',NULL,NULL,NULL,'2026-08-04 06:03:12'),(6,1,6,'Completed',NULL,NULL,NULL,'2026-08-04 06:03:12'),(7,1,7,'Not Started',NULL,NULL,NULL,'2026-08-04 06:03:12'),(8,1,8,'Completed',NULL,NULL,NULL,'2026-08-04 06:03:12'),(9,1,9,'Completed',NULL,NULL,NULL,'2026-08-04 06:03:12'),(10,1,10,'Not Started',NULL,NULL,NULL,'2026-08-04 06:03:12'),(11,1,11,'Not Started',NULL,NULL,NULL,'2026-08-04 06:03:12'),(12,1,12,'Not Started',NULL,NULL,NULL,'2026-08-04 06:03:12'),(13,1,13,'Completed',NULL,NULL,NULL,'2026-08-04 06:03:12'),(14,1,14,'Completed',NULL,NULL,NULL,'2026-08-04 06:03:12'),(29,1,15,'Not Started',NULL,NULL,'2026-09-13','2026-08-04 06:03:12'),(30,1,16,'Not Started',NULL,NULL,'2026-08-07','2026-08-04 06:03:12'),(31,1,17,'Not Started',NULL,NULL,'2026-08-18','2026-08-04 06:03:12'),(32,1,18,'Not Started',NULL,NULL,'2026-09-03','2026-08-04 06:03:12'),(33,1,19,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(34,2,1,'Not Started',NULL,NULL,'2026-08-11','2026-08-04 06:03:12'),(35,2,2,'Not Started',NULL,NULL,'2026-08-18','2026-08-04 06:03:12'),(36,2,3,'Not Started',NULL,NULL,'2026-08-11','2026-08-04 06:03:12'),(37,2,4,'Not Started',NULL,NULL,'2026-08-14','2026-08-04 06:03:12'),(38,2,5,'Not Started',NULL,NULL,'2026-08-25','2026-08-04 06:03:12'),(39,2,6,'Not Started',NULL,NULL,'2026-08-14','2026-08-04 06:03:12'),(40,2,7,'Not Started',NULL,NULL,'2026-10-03','2026-08-04 06:03:12'),(41,2,8,'Not Started',NULL,NULL,'2026-08-09','2026-08-04 06:03:12'),(42,2,9,'Not Started',NULL,NULL,'2026-08-25','2026-08-04 06:03:12'),(43,2,10,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(44,2,11,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(45,2,12,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(46,2,13,'Not Started',NULL,NULL,'2026-08-07','2026-08-04 06:03:12'),(47,2,14,'Not Started',NULL,NULL,'2026-09-03','2026-08-04 06:03:12'),(48,2,15,'Not Started',NULL,NULL,'2026-09-13','2026-08-04 06:03:12'),(49,2,16,'Not Started',NULL,NULL,'2026-08-07','2026-08-04 06:03:12'),(50,2,17,'Not Started',NULL,NULL,'2026-08-18','2026-08-04 06:03:12'),(51,2,18,'Not Started',NULL,NULL,'2026-09-03','2026-08-04 06:03:12'),(52,2,19,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(53,3,1,'Not Started',NULL,NULL,'2026-08-11','2026-08-04 06:03:12'),(54,3,2,'Not Started',NULL,NULL,'2026-08-18','2026-08-04 06:03:12'),(55,3,3,'Not Started',NULL,NULL,'2026-08-11','2026-08-04 06:03:12'),(56,3,4,'Not Started',NULL,NULL,'2026-08-14','2026-08-04 06:03:12'),(57,3,5,'Not Started',NULL,NULL,'2026-08-25','2026-08-04 06:03:12'),(58,3,6,'Not Started',NULL,NULL,'2026-08-14','2026-08-04 06:03:12'),(59,3,7,'Not Started',NULL,NULL,'2026-10-03','2026-08-04 06:03:12'),(60,3,8,'Not Started',NULL,NULL,'2026-08-09','2026-08-04 06:03:12'),(61,3,9,'Not Started',NULL,NULL,'2026-08-25','2026-08-04 06:03:12'),(62,3,10,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(63,3,11,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(64,3,12,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(65,3,13,'Not Started',NULL,NULL,'2026-08-07','2026-08-04 06:03:12'),(66,3,14,'Not Started',NULL,NULL,'2026-09-03','2026-08-04 06:03:12'),(67,3,15,'Not Started',NULL,NULL,'2026-09-13','2026-08-04 06:03:12'),(68,3,16,'Not Started',NULL,NULL,'2026-08-07','2026-08-04 06:03:12'),(69,3,17,'Not Started',NULL,NULL,'2026-08-18','2026-08-04 06:03:12'),(70,3,18,'Not Started',NULL,NULL,'2026-09-03','2026-08-04 06:03:12'),(71,3,19,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(72,4,1,'Not Started',NULL,NULL,'2026-08-11','2026-08-04 06:03:12'),(73,4,2,'Not Started',NULL,NULL,'2026-08-18','2026-08-04 06:03:12'),(74,4,3,'Not Started',NULL,NULL,'2026-08-11','2026-08-04 06:03:12'),(75,4,4,'Not Started',NULL,NULL,'2026-08-14','2026-08-04 06:03:12'),(76,4,5,'Not Started',NULL,NULL,'2026-08-25','2026-08-04 06:03:12'),(77,4,6,'Not Started',NULL,NULL,'2026-08-14','2026-08-04 06:03:12'),(78,4,7,'Not Started',NULL,NULL,'2026-10-03','2026-08-04 06:03:12'),(79,4,8,'Not Started',NULL,NULL,'2026-08-09','2026-08-04 06:03:12'),(80,4,9,'Not Started',NULL,NULL,'2026-08-25','2026-08-04 06:03:12'),(81,4,10,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(82,4,11,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(83,4,12,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(84,4,13,'Not Started',NULL,NULL,'2026-08-07','2026-08-04 06:03:12'),(85,4,14,'Not Started',NULL,NULL,'2026-09-03','2026-08-04 06:03:12'),(86,4,15,'Not Started',NULL,NULL,'2026-09-13','2026-08-04 06:03:12'),(87,4,16,'Not Started',NULL,NULL,'2026-08-07','2026-08-04 06:03:12'),(88,4,17,'Not Started',NULL,NULL,'2026-08-18','2026-08-04 06:03:12'),(89,4,18,'Not Started',NULL,NULL,'2026-09-03','2026-08-04 06:03:12'),(90,4,19,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(91,5,1,'Not Started',NULL,NULL,'2026-08-11','2026-08-04 06:03:12'),(92,5,2,'Not Started',NULL,NULL,'2026-08-18','2026-08-04 06:03:12'),(93,5,3,'Not Started',NULL,NULL,'2026-08-11','2026-08-04 06:03:12'),(94,5,4,'Not Started',NULL,NULL,'2026-08-14','2026-08-04 06:03:12'),(95,5,5,'Not Started',NULL,NULL,'2026-08-25','2026-08-04 06:03:12'),(96,5,6,'Not Started',NULL,NULL,'2026-08-14','2026-08-04 06:03:12'),(97,5,7,'Not Started',NULL,NULL,'2026-10-03','2026-08-04 06:03:12'),(98,5,8,'Not Started',NULL,NULL,'2026-08-09','2026-08-04 06:03:12'),(99,5,9,'Not Started',NULL,NULL,'2026-08-25','2026-08-04 06:03:12'),(100,5,10,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(101,5,11,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(102,5,12,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12'),(103,5,13,'Not Started',NULL,NULL,'2026-08-07','2026-08-04 06:03:12'),(104,5,14,'Not Started',NULL,NULL,'2026-09-03','2026-08-04 06:03:12'),(105,5,15,'Not Started',NULL,NULL,'2026-09-13','2026-08-04 06:03:12'),(106,5,16,'Not Started',NULL,NULL,'2026-08-07','2026-08-04 06:03:12'),(107,5,17,'Not Started',NULL,NULL,'2026-08-18','2026-08-04 06:03:12'),(108,5,18,'Not Started',NULL,NULL,'2026-09-03','2026-08-04 06:03:12'),(109,5,19,'Not Started',NULL,NULL,'2026-09-18','2026-08-04 06:03:12');
 /*!40000 ALTER TABLE `user_tasks` ENABLE KEYS */;
 UNLOCK TABLES;
-SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -65,4 +44,3 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-07-06 23:18:43
