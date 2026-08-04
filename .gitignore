@@ -14,3 +14,11 @@ backend/uploads/
 # Office temporary files
 docs/~$*
 docs/.~*
+
+# Working copies of the report and presentation. These are drafts that get
+# replaced rather than edited, and Git stores a whole new copy of a .pptx
+# every time one changes, so they are kept out of the repository.
+docs/*.pptx
+docs/*.docx
+docs/*.xlsx
+docs/*.pdf
