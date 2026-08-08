@@ -72,7 +72,7 @@ from the first visit.
 
 ## Project Information
 
-**Subject:** CP3404 Agile Software Engineering  
+**Subject:** CP3407 Agile Software Engineering  
 **Project Type:** Group Web Application  
 **Project Name:** SettleSmart  
 

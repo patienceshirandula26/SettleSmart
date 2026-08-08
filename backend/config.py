@@ -10,7 +10,10 @@ class Config:
     # variable so the same code runs on another machine without editing it.
     MYSQL_HOST = os.environ.get("MYSQL_HOST", "localhost")
     MYSQL_USER = os.environ.get("MYSQL_USER", "root")
-    MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "Muteshi@23")
+    # No password is stored in this file. Set MYSQL_PASSWORD in your
+    # environment before starting the server, for example:
+    #   MYSQL_PASSWORD='your-password' python3 backend/app.py
+    MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", "")
     MYSQL_DB = os.environ.get("MYSQL_DB", "settlesmart")
 
     # Where uploaded document files are stored on disk.
